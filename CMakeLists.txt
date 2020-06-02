@@ -1,3 +1,6 @@
+cmake_minimum_required(VERSION 3.4.0)
+project(examples)
+
 add_executable(unstrip unstrip.dir/unstrip.C
                        unstrip.dir/util.C
                        unstrip.dir/types.C
