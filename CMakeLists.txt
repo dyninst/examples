@@ -1,16 +1,6 @@
 cmake_minimum_required(VERSION 3.4.0)
 project(examples)
 
-add_executable(unstrip unstrip.dir/unstrip.C
-                       unstrip.dir/util.C
-                       unstrip.dir/types.C
-                       unstrip.dir/semanticDescriptor.C
-                       unstrip.dir/database.C
-                       unstrip.dir/fingerprint.C
-                       unstrip.dir/callback.C)
-add_dependencies(unstrip parseAPI symtabAPI instructionAPI common)
-target_link_libraries(unstrip parseAPI symtabAPI instructionAPI common dynDwarf dynElf ${Boost_LIBRARIES} ${ElfUtils_LIBRARIES})
-
 if(TARGET TBB)
     add_dependencies(Inst TBB)
 endif()
