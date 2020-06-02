@@ -4,13 +4,6 @@ project(examples)
 add_directory(codeCoverage)
 add_directory(unstrip)
 
-if (USE_OpenMP)
-set_target_properties (unstrip PROPERTIES COMPILE_FLAGS ${OpenMP_CXX_FLAGS} LINK_FLAGS ${OpenMP_CXX_FLAGS})
-set_target_properties (codeCoverage PROPERTIES COMPILE_FLAGS ${OpenMP_CXX_FLAGS} LINK_FLAGS ${OpenMP_CXX_FLAGS})
-set_target_properties (cfg_to_dot PROPERTIES COMPILE_FLAGS ${OpenMP_CXX_FLAGS} LINK_FLAGS ${OpenMP_CXX_FLAGS})
-endif()
-
-
 install (TARGETS cfg_to_dot unstrip codeCoverage Inst
         RUNTIME DESTINATION ${INSTALL_BIN_DIR}
         LIBRARY DESTINATION ${INSTALL_LIB_DIR}
