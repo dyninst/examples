@@ -4,10 +4,6 @@ project(examples)
 add_directory(codeCoverage)
 add_directory(unstrip)
 
-if(TARGET TBB)
-    add_dependencies(Inst TBB)
-endif()
-
 if (USE_OpenMP)
 set_target_properties (unstrip PROPERTIES COMPILE_FLAGS ${OpenMP_CXX_FLAGS} LINK_FLAGS ${OpenMP_CXX_FLAGS})
 set_target_properties (codeCoverage PROPERTIES COMPILE_FLAGS ${OpenMP_CXX_FLAGS} LINK_FLAGS ${OpenMP_CXX_FLAGS})
