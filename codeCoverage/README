@@ -17,14 +17,6 @@ coverage data. The tool adds this library as a dependency to the input
 executable and also inserts calls into this library at function entries and
 basic block entries.
 
-The provided Makefile can be used to build the program. The DYNINST_ROOT
-environment variable should be set to the directory where Dyninst was
-built/installed. This directory should contain an include directory with the
-Dyninst headers and a lib directory with the Dyninst libraries. Also, make sure
-to set the LD_LIBRARY_PATH environment variable to include the library
-directory and set the DYNINSTAPI_RT_LIB environment variable to
-${DYNINST_LIBRARY_DIRECTORY}/libdyninstAPI_RT.so.1
-
 Also included in this directory is a toy program that demonstrates a use of the
 codeCoverage tool: testcc and libtestcc. They can be built with the provided
 Makefile.
