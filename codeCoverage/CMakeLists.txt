@@ -2,9 +2,9 @@ cmake_minimum_required(VERSION 3.4.0)
 project(codeCoverage LANGUAGES CXX)
 
 # The main code coverage tool
-add_executable(codeCoverage codeCoverage.C)
-target_include_directories(codeCoverage PRIVATE ${DYNINST_INCLUDE_DIR})
-target_link_libraries(codeCoverage dyninstAPI)
+add_executable(code_coverage code_coverage.C)
+target_include_directories(code_coverage PRIVATE ${DYNINST_INCLUDE_DIR})
+target_link_libraries(code_coverage dyninstAPI)
 
 # An example instrumentation library
 add_library(Inst SHARED Inst.C)
@@ -22,3 +22,6 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
   target_compile_options(testcc PRIVATE "-fno-pie")
   target_link_options(testcc PRIVATE "-fno-pie")
 endif()
+
+# A dummy target to allow building this example by itself
+add_custom_target(codeCoverage DEPENDS code_coverage testcc)
