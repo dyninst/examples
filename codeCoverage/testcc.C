@@ -1,8 +1,4 @@
-/*
- * A toy test program to demonstrate the codeCoverage tool
- */
-
-#include "libtestcc.h"
+void external(int);
 
 int twoCalled = 0;
 int threeCalled = 0;
@@ -19,7 +15,7 @@ void one(int callThree, int callLib) {
   two(callThree);
 
   if (callLib)
-    libFooFunction(callThree);
+	  external(callThree);
 }
 
 int main(int argc, char *argv[]) {

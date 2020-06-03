@@ -11,7 +11,7 @@
 #include <iostream>
 #include <vector>
 
-#include "libInst.h"
+#include "Inst.h"
 
 using namespace std;
 

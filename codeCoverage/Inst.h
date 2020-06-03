@@ -1,5 +1,4 @@
-#ifndef __LIB_INST_H__
-#define __LIB_INST_H__
+#pragma once
 
 #if !defined(LIB_EXPORT)
 #if defined(_MSC_VER)
@@ -15,5 +14,3 @@ LIB_EXPORT void registerBB(int, char *, char *, unsigned long);
 LIB_EXPORT void incFuncCoverage(int);
 LIB_EXPORT void incBBCoverage(int);
 LIB_EXPORT void exitCoverage(int, int, int);
-
-#endif
