@@ -16,9 +16,9 @@ add_library(external SHARED external.C)
 add_executable(testcc testcc.C)
 target_link_libraries(testcc Inst external)
 
-# Some builds of gcc have PIE enabled by default.
-# Dyninst doesn't handle them correctly, so disable this
+# Some builds of gcc have PIE enabled by default. Dyninst doesn't handle them
+# correctly, so disable this
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
-	target_compile_options(testcc PRIVATE "-fno-pie")
-	target_link_options(testcc PRIVATE "-fno-pie")
+  target_compile_options(testcc PRIVATE "-fno-pie")
+  target_link_options(testcc PRIVATE "-fno-pie")
 endif()
