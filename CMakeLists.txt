@@ -9,11 +9,11 @@ if(NOT Dyninst_DIR)
       FATAL_ERROR
         "Dyninst_DIR not found: define as a cache or environment variable")
   else()
-    set(_dyninst_dir ENV{Dyninst_DIR})
+    set(_dyninst_dir $ENV{Dyninst_DIR})
   endif()
 else()
   set(_dyninst_dir ${Dyninst_DIR})
-  set(ENV{Dyninst_DIR} ${_dyninst_dir})
+  set($ENV{Dyninst_DIR} ${_dyninst_dir})
 endif()
 
 # Make sure it's an absolute path
@@ -65,5 +65,6 @@ add_subdirectory(codeCoverage)
 add_subdirectory(unstrip)
 add_subdirectory(instrumentAFunction)
 add_subdirectory(binaryAnalysis)
+add_subdirectory(instrumentMemoryAccess)
 add_subdirectory(retee)
 
