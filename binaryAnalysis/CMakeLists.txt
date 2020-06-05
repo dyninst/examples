@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 3.4.0)
-project(instrumentAFunction LANGUAGES CXX)
+project(binaryAnalysis LANGUAGES CXX)
 
 # The main code coverage tool
-add_executable(instrumenting_a_function instrumenting_a_function.cpp)
-target_include_directories(instrumenting_a_function PRIVATE ${DYNINST_INCLUDE_DIR})
-target_link_libraries(instrumenting_a_function dyninstAPI)
+add_executable(binary_analysis binary_analysis.cpp)
+target_include_directories(binary_analysis PRIVATE ${DYNINST_INCLUDE_DIR})
+target_link_libraries(binary_analysis dyninstAPI instructionAPI)
 
 
 # An example binary to be manipulated by codeCoverage
