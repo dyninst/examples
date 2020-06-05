@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.4.0)
-project(codeCoverage LANGUAGES CXX)
+project(instrumentAFunction LANGUAGES CXX)
 
 # The main code coverage tool
 add_executable(instrumenting_a_function instrumenting_a_function.cpp)
