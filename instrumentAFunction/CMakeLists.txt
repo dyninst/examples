@@ -8,7 +8,7 @@ target_link_libraries(instrumenting_a_function dyninstAPI)
 
 
 # An example binary to be manipulated by codeCoverage
-#add_executable(testcc testcc.C)
+add_executable(InterestingProgram ${EXAMPLE_ROOT}/common/mutatees/InterestingProgram.cpp)
 #target_link_libraries(testcc Inst external)
 
 # Some builds of gcc have PIE enabled by default. Dyninst doesn't handle them

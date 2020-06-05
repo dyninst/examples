@@ -59,7 +59,7 @@ include(optimization)
 # ----------------------------------------------------------------------------#
 
 # Set up the individual examples
-
+get_filename_component(EXAMPLE_ROOT ${CMAKE_CURRENT_SOURCE_DIR} ABSOLUTE)
 add_subdirectory(codeCoverage)
 add_subdirectory(instrumentAFunction)
 add_subdirectory(unstrip)
