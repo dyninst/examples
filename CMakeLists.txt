@@ -61,4 +61,5 @@ include(optimization)
 # Set up the individual examples
 
 add_subdirectory(codeCoverage)
+add_subdirectory(instrumentAFunction)
 add_subdirectory(unstrip)
