@@ -67,4 +67,4 @@ add_subdirectory(instrumentAFunction)
 add_subdirectory(binaryAnalysis)
 add_subdirectory(instrumentMemoryAccess)
 add_subdirectory(retee)
-
+add_subdirectory(maxArg)
