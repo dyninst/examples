@@ -32,12 +32,30 @@ BPatch bpatch;
 
 // configuration options
 static char *pathname = NULL;
-//static char *outbinary = "output";
-static const char **args = NULL;
+//ProcessCreat() accepts only constant char**
+//if the program takes args, change the length equal to the number of args
+//static const char *args[n] = NULL;
 
 bool parseArgs (int argc, char *argv[])
 {
-    return true;
+	if (argc == 1)
+	{
+		return false;
+	}
+	else
+	{
+		pathname = argv[1];
+		if ( argc > 2)
+		{
+			/* uncomment to populate the args
+			for ( size_t i = 2; i < len; i++)
+			{
+				args[i-2] = argv[i];
+			}
+			*/
+		}
+	}
+	return true;
 }
 
 bool instrumentCounter()
@@ -56,52 +74,41 @@ bool instrumentPrint()
  */
 int main (int argc, char *argv[])
 {
-        if (!parseArgs (argc, argv))
-        	return EXIT_FAILURE;
+        if (!parseArgs (argc, argv)) return EXIT_FAILURE;
 
-	pathname = argv[1];
-
-
-
-
+	
 	//identifies the application process to be modified
-	//BPatch_process *appProc = bpatch.processCreate(pathname, args);
-	//BPatch_binaryEdit *appBin = bpatch.openBinary(pathname, true);
-	BPatch_process *appProc = bpatch.processCreate(pathname, args);
+	//replace NULL with args in case mutantee requires args
+	BPatch_process *appProc = bpatch.processCreate(pathname, NULL);
 	BPatch_addressSpace *app = appProc;
 	BPatch_image *appImage = app->getImage();
-	//std::vector<BPatch_function *> functions;
-	//appThread->bpatch.createProcess(pathname, args); 
-	//BPatch_image *appImage = app->getImage(); 
 
 
-
-
-	//insert the call counter at the start of interesting prcedure
-	vector<BPatch_function*> functions;
+	//insert the call counter snippetat the start of interesting prcedure
+	//locate target function InterestingProcedure
+	std::vector<BPatch_function*> functions;
 	appImage->findFunction("InterestingProcedure", functions);
-	//vector < BPatch_function * >::iterator funcIter = functions.begin();
+	//locate the start of the function
 	std::vector<BPatch_point *> *points;
 	points = functions[0]->findPoint(BPatch_locEntry);
-	//BPatch_function * headFunc = *funcIter;
-	//std::vector<BPatch_point*>* points = 
-	//	headFunc->findPoint(BPatch_locEntry);
-
+	
+	//construct snippet
+	//int intCounter = 0
 	BPatch_variableExpr *intCounter =
-		app->malloc(*appImage->findType("int"));
-
+		app->malloc(*appImage->findType("int"), "intCounter");
+	//at the start of InterestingProcedure, intCounter++;
 	BPatch_arithExpr addOne(BPatch_assign, 
 			*intCounter, BPatch_arithExpr(BPatch_plus, *intCounter, BPatch_constExpr(1)));
-	
-	if (!app->insertSnippet(addOne, *points, BPatch_callBefore, BPatch_lastSnippet)) {
+	//insert counter snippet
+	if (!app->insertSnippet(addOne, *points)) {
 		fprintf(stderr, "insertSnippet failed\n");
 	        return false;
 	}
 
 
-
 	//insert the counter printer at the end of main function
-	vector<BPatch_function*> func2;
+	//find main function
+	std::vector<BPatch_function*> func2;
         appImage->findFunction("main", func2);
 	std::vector<BPatch_point *> *exitPoint;
 	exitPoint = func2[0]->findPoint(BPatch_exit);
@@ -111,26 +118,20 @@ int main (int argc, char *argv[])
         	exit(1);
     	}
 
-   	 std::vector<BPatch_snippet*> printfArgs;
+	//construct printf snippet
+   	std::vector<BPatch_snippet*> printfArgs;
 	BPatch_snippet* fmt =
         new BPatch_constExpr("InterestingProcedure called %d times\n");
        	printfArgs.push_back(fmt);
-	BPatch_variableExpr* var = appImage->findVariable("intCounter");
+	//put intCounter to printf args
+	BPatch_variableExpr* var = intCounter;
 	printfArgs.push_back(var);
-
+	//find printf
 	std::vector<BPatch_function*> printfFuncs;
 	appImage->findFunction("printf", printfFuncs);
-
-
 	BPatch_funcCallExpr printfCall(*(printfFuncs[0]), printfArgs);
-	//BPatch_breakPointExpr stop();
-	//vector<BPatch_function*> functions2;
-	//appImage->findFunction("main", functions2);
-	//std::vector<BPatch_point *> *points2;
-	//points2 = functions2[0]->findPoint(BPatch_locEntry);
-	//app->insertSnippet(BPatch_breakPointExpr(),  *points2, BPatch_callBefore, BPatch_lastSnippet);
-	
-	
+	//insert printf snippet
+	app->insertSnippet(printfCall, *exitPoint);	
 	
 	
 	// wait for the program to finish
