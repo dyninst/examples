@@ -40,8 +40,7 @@ find_package(Dyninst REQUIRED
                         symtabAPI
                         common)
 
-# message(INFO "CMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}") set default configuration
-# type
+# Set default configuration type
 if(NOT CMAKE_BUILD_TYPE)
   set(
     CMAKE_BUILD_TYPE RelWithDebInfo
