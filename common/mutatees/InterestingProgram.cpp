@@ -1,23 +1,18 @@
-#include <cstdlib>
 #include <iostream>
 using namespace std;
-class Test{
+
+class Test {
 public:
-    int a;
-    char b;
-    Test(){
-
-    }
-
+	int a;
+	char b;
 };
 
-void InterestingProcedure(){
-    cout << " Calling function " << __func__ << endl; 
-    Test * test = new Test();
-    delete (test);
+void InterestingProcedure() {
+	cout << " Calling function " << __func__ << endl;
+	Test *test = new Test();
+	delete (test);
 }
 
-int main(int argc, char * argv[]){
-    InterestingProcedure();
-    return 0;
+int main() {
+	InterestingProcedure();
 }
