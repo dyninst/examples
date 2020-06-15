@@ -68,7 +68,8 @@ bool DescriptorDatabase::build()
         /* Parse the current line */
         if (fgets(cur, MAXLEN, descriptorFile) == NULL) break;
         while (strstr(cur,endDelim) == NULL) {
-            fgets(cur2, MAXLEN, descriptorFile);
+            const auto ret = fgets(cur2, MAXLEN, descriptorFile);
+            (void)ret;
             strcat(cur,cur2);
         }
 
@@ -214,7 +215,7 @@ SemanticDescriptorElem DescriptorDatabase::process(char * _trapVector)
 {
     char * trapVector = (char*)malloc(sizeof(char)*(strlen(_trapVector)+1));
     assert(trapVector);
-    strncpy(trapVector, _trapVector, strlen(_trapVector)+1);
+    strcpy(trapVector, _trapVector);
     SemanticDescriptorElem values;
     const char * delim = ",";
 
@@ -222,7 +223,7 @@ SemanticDescriptorElem DescriptorDatabase::process(char * _trapVector)
     char * val = strtok(trapVector, delim);
     char * curVal = (char*)malloc(sizeof(char)*(strlen(val)+1));
     assert(curVal);
-    strncpy(curVal, val, strlen(val)+1);
+    strcpy(curVal, val);
     values.push_back((void*)curVal);
     string curValString(curVal);
 
@@ -245,7 +246,7 @@ SemanticDescriptorElem DescriptorDatabase::process(char * _trapVector)
             } else if (params[pos] == _s) {
                 char * newCurVal = (char*)malloc(sizeof(char)*(strlen(val)+1));
                 assert(newCurVal);
-                strncpy(newCurVal, val, strlen(val)+1);
+                strcpy(newCurVal, val);
                 values.push_back((void*)newCurVal);
             } else {
                 values.push_back((void*)val);
