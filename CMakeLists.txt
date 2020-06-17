@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.4.0)
+cmake_minimum_required(VERSION 3.13.0)
 project(examples)
 
 # User must provide location of Dyninst cmake files either as a cache or
@@ -24,6 +24,7 @@ if(NOT IS_ABSOLUTE ${_dyninst_dir})
 endif()
 
 set(Dyninst_DIR ${_dyninst_dir} CACHE PATH "Location of Dyninst cmake files")
+get_filename_component(BOOST_ROOT ${_dyninst_dir}/../../../ ABSOLUTE)
 
 # Use the Dyninst-provided CMake modules
 set(CMAKE_MODULE_PATH
@@ -38,8 +39,10 @@ find_package(Dyninst REQUIRED
                         instructionAPI
                         parseAPI
                         symtabAPI
-                        common)
+                        common
+                        )
 
+find_package(Boost 1.61.0 COMPONENTS system REQUIRED)
 # Set default configuration type
 if(NOT CMAKE_BUILD_TYPE)
   set(

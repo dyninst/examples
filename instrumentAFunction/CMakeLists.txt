@@ -3,7 +3,7 @@ project(instrumentAFunction LANGUAGES CXX)
 
 add_executable(instrumenting_a_function instrumenting_a_function.cpp)
 target_include_directories(instrumenting_a_function PRIVATE ${DYNINST_INCLUDE_DIR})
-target_link_libraries(instrumenting_a_function dyninstAPI)
+target_link_libraries(instrumenting_a_function dyninstAPI ${Boost_SYSTEM_LIBRARY})
 
 install(TARGETS InterestingProgram 
     RUNTIME DESTINATION ${PROJECT_BINARY_DIR}

@@ -17,4 +17,6 @@ target_link_libraries(unstrip
                       instructionAPI
                       parseAPI
                       symtabAPI
-                      common)
+                      common
+                      ${Boost_SYSTEM_LIBRARY}
+                      )

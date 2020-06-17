@@ -1,10 +1,10 @@
-cmake_minimum_required(VERSION 3.4.0)
+cmake_minimum_required(VERSION 3.13.0)
 project(codeCoverage LANGUAGES CXX)
 
 # The main code coverage tool
 add_executable(code_coverage code_coverage.C)
 target_include_directories(code_coverage PRIVATE ${DYNINST_INCLUDE_DIR})
-target_link_libraries(code_coverage dyninstAPI)
+target_link_libraries(code_coverage dyninstAPI ${BOOST} ${Boost_SYSTEM_LIBRARY})
 
 # An example instrumentation library
 add_library(Inst SHARED Inst.C)
