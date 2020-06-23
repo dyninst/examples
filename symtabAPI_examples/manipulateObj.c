@@ -3,13 +3,15 @@
 //#include <vector>
 
 #include "CodeObject.h"
-#include "Symtab.h"
-#include "Function.h"
-#include "Symbol.h"
-#include "symlookup.h"
-#include "Symtab.h"
-#include "symutil.h"
 #include "Variable.h"
+#include "Function.h"
+//#include "Symtab.h"
+//#include "Function.h"
+#include "Symbol.h"
+#include "Symtab.h"
+#include "symlookup.h"
+#include "symutil.h"
+//#include "Variable.h"
 //#include "Type.h"
 //#include "mapped_module.h"
 
@@ -70,9 +72,7 @@ int main(int argc, char** argv)
 
 	/*******************    Section 3    ********************/
 	//create and add new symbol
-	//Module for the symbol
-	Module *mod;
-
+	
 	//obj represents a handle to a parsed object file.
 	//Lookup module handle for “DEFAULT_MODULE” 
 	//obj->findModuleByName(mod, "DEFAULT_MODULE");
@@ -106,8 +106,7 @@ int main(int argc, char** argv)
 	dyn_c_vector<std::pair<std::string, Type *> > fields;
 
 	//create a new array type(int type2[10])
-	//unsigned int lo = 0;
-	//unsigned int hi = 9;
+	//		need fix
 	std::string arrName = "intArray";
 	typeArray *intArray = typeArray::create(arrName,intType,0,9);
 
@@ -116,9 +115,10 @@ int main(int argc, char** argv)
 	fields.push_back(std::pair<std::string, Type *>("field2", intArray));
 
 	//create the structure type
+	//		need fix
 	std::string structName = "structl";
 	typeStruct *struct1 = typeStruct::create(structName, fields, obj);
-
+	
 
 
 
@@ -131,7 +131,7 @@ int main(int argc, char** argv)
 
 	// Get the address range for the line 30 in source file foo.c
 	obj->getAddressRanges( ranges, "foo.c", 30 );
-
+	
 
 
 	/*******************    Section 6    ********************/
@@ -144,7 +144,7 @@ int main(int argc, char** argv)
 
 	// Find the local var foo within function bar
 	std::vector<localVar *> *vars = bar_syms[0]->findLocalVarible("foo");
-
+	
 
 
 
