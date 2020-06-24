@@ -5,12 +5,14 @@
 #include "CodeObject.h"
 #include "Variable.h"
 #include "Function.h"
+#include "LineInformation.h"
 //#include "Symtab.h"
 //#include "Function.h"
 #include "Symbol.h"
 #include "Symtab.h"
 #include "symlookup.h"
 #include "symutil.h"
+//#include "LineInformation.h"
 //#include "Variable.h"
 //#include "Type.h"
 //#include "mapped_module.h"
@@ -103,7 +105,7 @@ int main(int argc, char** argv)
 	typeScalar *intType = lookupType->getScalarType();
 
 	// container to hold names and types of the new structure type
-	dyn_c_vector<std::pair<std::string, Type *> > fields;
+	dyn_c_vector<std::pair<std::string, Type *>*> fields;
 
 	//create a new array type(int type2[10])
 	//		need fix
@@ -111,8 +113,8 @@ int main(int argc, char** argv)
 	typeArray *intArray = typeArray::create(arrName,intType,0,9);
 
 	//types of the structure fields
-	fields.push_back(std::pair<std::string, Type *>("field1", intType));
-	fields.push_back(std::pair<std::string, Type *>("field2", intArray));
+	fields.push_back(new std::pair<std::string, Type *>("field1", intType));
+	fields.push_back(new std::pair<std::string, Type *>("field2", intArray));
 
 	//create the structure type
 	//		need fix
@@ -127,10 +129,13 @@ int main(int argc, char** argv)
 	
 	// obj represents a handle to a parsed object file using symtabAPI
 	// Container to hold the address range
-	std::vector< std::pair< Offset, Offset > > ranges;
+	//cout << Offset << "\n\n";
+	//std::vector< std::pair< Offset, Offset > > ranges;
+	std::vector< AddressRange > ranges;
 
 	// Get the address range for the line 30 in source file foo.c
-	obj->getAddressRanges( ranges, "foo.c", 30 );
+	std::string srcName = "foo.c";
+	obj->getAddressRanges( ranges, srcName, 30 );
 	
 
 
@@ -143,7 +148,8 @@ int main(int argc, char** argv)
 	obj->findSymbol(bar_syms, "bar", Symbol::ST_FUNCTION);
 
 	// Find the local var foo within function bar
-	std::vector<localVar *> *vars = bar_syms[0]->findLocalVarible("foo");
+	std::vector<localVar*> local_vars;
+	bar_syms[0]->getFunction()->findLocalVariable(local_vars, "foo");
 	
 
 
