@@ -23,9 +23,6 @@ if(NOT IS_ABSOLUTE ${_dyninst_dir})
   unset(_tmp)
 endif()
 
-set(Dyninst_DIR ${_dyninst_dir} CACHE PATH "Location of Dyninst cmake files")
-get_filename_component(BOOST_ROOT ${_dyninst_dir}/../../../ ABSOLUTE)
-
 # Use the Dyninst-provided CMake modules
 set(CMAKE_MODULE_PATH
     "${Dyninst_DIR}"
@@ -39,10 +36,16 @@ find_package(Dyninst REQUIRED
                         instructionAPI
                         parseAPI
                         symtabAPI
-                        common
-                        )
+                        common)
 
-find_package(Boost 1.61.0 COMPONENTS system REQUIRED)
+# Read the cache generated from building Dyninst
+load_cache(${Dyninst_DIR}
+           READ_WITH_PREFIX DYNINST_
+           Boost_LIBRARIES
+           Boost_INCLUDE_DIRS
+           Boost_LIBRARY_DIRS
+           Boost_DEFINES)
+
 # Set default configuration type
 if(NOT CMAKE_BUILD_TYPE)
   set(

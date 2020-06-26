@@ -4,7 +4,7 @@ project(codeCoverage LANGUAGES CXX)
 # The main code coverage tool
 add_executable(code_coverage code_coverage.C)
 target_include_directories(code_coverage PRIVATE ${DYNINST_INCLUDE_DIR})
-target_link_libraries(code_coverage dyninstAPI ${BOOST} ${Boost_SYSTEM_LIBRARY})
+target_link_libraries(code_coverage dyninstAPI ${DYNINST_Boost_LIBRARIES})
 
 # An example instrumentation library
 add_library(Inst SHARED Inst.C)

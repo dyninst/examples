@@ -10,13 +10,15 @@ add_executable(unstrip
                fingerprint.C
                callback.C)
 
-target_include_directories(unstrip PRIVATE ${DYNINST_INCLUDE_DIR})
+target_include_directories(unstrip PRIVATE ${DYNINST_INCLUDE_DIR} ${DYNINST_Boost_INCLUDE_DIRS})
+target_compile_definitions(unstrip PRIVATE ${DYNINST_Boost_DEFINITIONS})
 
+target_link_directories(unstrip PRIVATE ${DYNINST_Boost_LIBRARY_DIRS})
 target_link_libraries(unstrip
                       dyninstAPI
                       instructionAPI
                       parseAPI
                       symtabAPI
                       common
-                      ${Boost_SYSTEM_LIBRARY}
+                      ${DYNINST_Boost_LIBRARIES}
                       )
