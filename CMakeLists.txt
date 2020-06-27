@@ -23,6 +23,10 @@ if(NOT IS_ABSOLUTE ${_dyninst_dir})
   unset(_tmp)
 endif()
 
+# Save the munged path in the global name
+set(Dyninst_DIR ${_dyninst_dir})
+unset(_dyninst_dir)
+
 # Use the Dyninst-provided CMake modules
 set(CMAKE_MODULE_PATH
     "${Dyninst_DIR}"
