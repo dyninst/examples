@@ -1,10 +1,11 @@
 #include <stdlib.h>
 #include <iostream>
+//#include <stdio.h>
 //#include <vector>
 
 #include "CodeObject.h"
-#include "Variable.h"
-#include "Function.h"
+//#include "Variable.h"
+//#include "Function.h"
 #include "LineInformation.h"
 //#include "Symtab.h"
 //#include "Function.h"
@@ -12,6 +13,10 @@
 #include "Symtab.h"
 #include "symlookup.h"
 #include "symutil.h"
+//#include "Module.h"
+#include "Function.h"
+#include "Aggregate.h"
+#include "Variable.h"
 //#include "LineInformation.h"
 //#include "Variable.h"
 //#include "Type.h"
@@ -19,7 +24,7 @@
 
 using namespace Dyninst;
 using namespace SymtabAPI;
-
+using namespace std;
 //Name the object file to be parsed:
 std::string file = "libfoo.so";
 
@@ -84,7 +89,7 @@ int main(int argc, char** argv)
                                        0x12345,      // Offset from data section
                                        sizeof(int)); // Size of symbol 
 
-
+	newVar->setModule(obj->getDefaultModule());
 
 	
 
