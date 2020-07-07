@@ -14,11 +14,11 @@ The project can be built out-of-source using the usual `-B` and `-H` CMake flags
 
 The default CMake configure uses GNU Makefiles as the generator, so to build is just
 
-    make
+    make install
 
 You can build individual examples using their names. For example,
 
-    make codeCoverage
+    make install codeCoverage
 
 ## Running
 
