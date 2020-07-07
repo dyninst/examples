@@ -1,5 +1,4 @@
-# examples
-Example usage of Dyninst
+# Example usage of [Dyninst](https://github.com/dyninst/dyninst)
 
 ## Building
 
