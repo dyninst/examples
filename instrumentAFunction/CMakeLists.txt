@@ -1,4 +1,3 @@
-cmake_minimum_required(VERSION 3.4.0)
 project(instrumentAFunction LANGUAGES CXX)
 
 add_executable(instrumenting_a_function instrumenting_a_function.cpp)
@@ -10,4 +9,3 @@ install(TARGETS InterestingProgram
     LIBRARY DESTINATION ${PROJECT_BINARY_DIR}
     ARCHIVE DESTINATION ${PROJECT_BINARY_DIR}
     )
-
