@@ -1,0 +1,11 @@
+# Eclipse Files
+.settings
+.cproject
+.project
+
+# CMake files
+CMakeCache.txt
+CMakeFiles
+Makefile
+cmake_install.cmake
+*.swp
