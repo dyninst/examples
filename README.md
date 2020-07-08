@@ -16,10 +16,6 @@ The default CMake configure uses GNU Makefiles as the generator, so to build is 
 
     make install
 
-You can build individual examples using their names. For example,
-
-    make install codeCoverage
-
 ## Running
 
 Each example is built in its own subdirectory under the main build directory (if you didn't specify `-B` when running CMake, the build directory is just the root of the `examples` project directory). For example, to run the codeCoverage example
@@ -29,4 +25,3 @@ Each example is built in its own subdirectory under the main build directory (if
 	$ export LD_LIBRARY_PATH=.:path/to/dyninst/lib:$LD_LIBRARY_PATH
 	$ ./code_coverage -p testcc testcc.inst
 	$ ./testcc.inst
-
