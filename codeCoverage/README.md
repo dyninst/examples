@@ -21,17 +21,18 @@ basic block entries.
 
 How to use this example:
 
-1. Make sure that the directory where the `codeCoverage` binary is located is
+1. Make sure that the directory where the `code_coverage` binary is located is
    part of your loader's path
 
-   For bash: % export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH
-   For csch: % setenv LD_LIBRARY_PATH .:${LD_LIBRARY_PATH}
+   For bash: `% export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH`
+   
+   For csch: `% setenv LD_LIBRARY_PATH .:${LD_LIBRARY_PATH}`
 
-2. Execute codeCoverage without any arguments to see the usage.
+2. Execute `code_coverage` without any arguments to see the usage.
 
-	$ ./codeCoverage
+	$ ./code_coverage
 	Input binary not specified.
-	Usage: ./codeCoverage [-bpsa] <binary> <output binary>
+	Usage: ./code_coverage [-bpsa] <binary> <output binary>
 	    -b: Basic block level code coverage
 	    -p: Print all functions (including functions that are never executed)
 	    -s: Instrument shared libraries also
@@ -40,7 +41,7 @@ How to use this example:
 3. Pass the testcc executable as input, instrumenting basic blocks as
    well as the example shared library used by testcc, libexternal.so.
 
-	$ ./codeCoverage -sb ./testcc testcc.inst
+	$ ./code_coverage -sb ./testcc testcc.inst
 	  [ Lots of output stating what the tool is doing ]
 
    You may notice that the tool skips some shared libraries. The default behavior
