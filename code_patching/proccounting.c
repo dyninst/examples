@@ -45,15 +45,6 @@ bool parseArgs (int argc, char *argv[])
 	else
 	{
 		pathname = argv[1];
-		if ( argc > 2)
-		{
-			/* uncomment to populate the args
-			for ( size_t i = 2; i < len; i++)
-			{
-				args[i-2] = argv[i];
-			}
-			*/
-		}
 	}
 	return true;
 }
@@ -74,8 +65,10 @@ bool instrumentPrint()
  */
 int main (int argc, char *argv[])
 {
-        if (!parseArgs (argc, argv)) return EXIT_FAILURE;
-
+        if (!parseArgs (argc, argv)) {
+		printf("usage: %s <input binary>", argv[0]);
+		return EXIT_FAILURE;
+	}
 	
 	//identifies the application process to be modified
 	//replace NULL with args in case mutantee requires args
