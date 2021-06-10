@@ -58,7 +58,7 @@ int main(int argc, char **argv){
 		//get address of entry point for current function
 		Address crtAddr = f->addr();
 		int instr_count = 0;
-		instr = decoder.decode();
+		instr = decoder.decode((unsigned char *)f->isrc()->getPtrToInstruction(crtAddr));
 		auto fbl = f->blocks().end();
 		fbl--;
 		Block *b = *fbl;
@@ -69,7 +69,7 @@ int main(int argc, char **argv){
 		cout << "\n\n\"" << f->name() << "\" :";
 		while(crtAddr < lastAddr){
 			//decode current instruction
-			instr = decoder.decode();
+			instr = decoder.decode((unsigned char *)f->isrc()->getPtrToInstruction(crtAddr));
 			cout << "\n" << hex << crtAddr;
 			cout << ": \"" << instr.format() << "\"";
 			//go to the address of the next instruction
