@@ -26,7 +26,7 @@ int main(int argc, char **argv){
 
 	SymtabCodeSource *sts;
 	CodeObject *co;
-	Instruction::Ptr instr;
+	Instruction instr;
 	SymtabAPI::Symtab *symTab;
 	std::string binaryPathStr(binaryPath);
 	bool isParsable = SymtabAPI::Symtab::openFile(symTab, binaryPathStr);
@@ -58,7 +58,7 @@ int main(int argc, char **argv){
 		//get address of entry point for current function
 		Address crtAddr = f->addr();
 		int instr_count = 0;
-		instr = decoder.decode((unsigned char *)f->isrc()->getPtrToInstruction(crtAddr));
+		instr = decoder.decode();
 		auto fbl = f->blocks().end();
 		fbl--;
 		Block *b = *fbl;
@@ -69,11 +69,11 @@ int main(int argc, char **argv){
 		cout << "\n\n\"" << f->name() << "\" :";
 		while(crtAddr < lastAddr){
 			//decode current instruction
-			instr = decoder.decode((unsigned char *)f->isrc()->getPtrToInstruction(crtAddr));
+			instr = decoder.decode();
 			cout << "\n" << hex << crtAddr;
-			cout << ": \"" << instr->format() << "\"";
+			cout << ": \"" << instr.format() << "\"";
 			//go to the address of the next instruction
-			crtAddr += instr->size();
+			crtAddr += instr.size();
 			instr_count++;
 		}
 	}
