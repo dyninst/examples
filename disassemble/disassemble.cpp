@@ -62,7 +62,7 @@ int main(int argc, char **argv){
 		auto fbl = f->blocks().end();
 		fbl--;
 		Block *b = *fbl;
-		Address lastAddr = b->last();
+		Address lastAddr = b->end();
 		//if current function has zero instructions, d o n t output it
 		if(crtAddr == lastAddr)
 			continue;
