@@ -1,4 +1,4 @@
-project(unstrip LANGUAGES CXX)
+project(CFGraph LANGUAGES CXX)
 
 add_executable(CFGraph
                CFGraph.cpp)
