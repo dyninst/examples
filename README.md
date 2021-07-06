@@ -16,6 +16,10 @@ The default CMake configure uses GNU Makefiles as the generator, so to build is 
 
     make install
 
+To build only specific examples, you can specify their names like so
+
+    make codeCoverage CFGraph
+
 ## Running
 
 Each example is built in its own subdirectory under the main build directory (if you didn't specify `-B` when running CMake, the build directory is just the root of the `examples` project directory). For example, to run the codeCoverage example
