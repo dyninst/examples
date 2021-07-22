@@ -37,6 +37,10 @@ int main(int argc, char **argv){
 
 	// Iterate through each of the functions.
 	for(auto f: co->funcs()) {
+		// Perform the liveness analysis on function.
+		LivenessAnalyzer la(f->obj()->cs()->getAddressWidth());
+		la.analyze(f);
+
 		// Get the first instruction of the first basic block (function entry).
 		Block *bb = *f->blocks().begin();
 		Address curAddr = bb->start();
@@ -46,19 +50,15 @@ int main(int argc, char **argv){
 		InsnLoc i(bb,  curAddr, curInsn);
 		Location loc(f, i);
 
-		// Perform the liveness analysis.
-		LivenessAnalyzer la(f->obj()->cs()->getAddressWidth());
-		la.analyze(f);
-
-		cout  << hex << curAddr << " " << f->name() << ": ";
-
+		// Get the formal parameters and count them.
 		SymtabAPI :: Function *func_sym;
 		obj->findFuncByEntryOffset(func_sym, curAddr);
-		// Count the formal parameters.
 		vector <localVar *> parms;
 		func_sym->getParams(parms);
 		int num_parms = parms.size();
 
+		// Output the results for the function
+		cout  << hex << curAddr << " " << f->name() << ": ";
 		for (int i=0; i<min(num_parms, num_reg_args); ++i) {
 			// Print up arg number if associated register is unused.
 			bool used;
