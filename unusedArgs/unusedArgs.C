@@ -52,7 +52,8 @@ int main(int argc, char **argv){
 
 		// Get the formal parameters and count them.
 		SymtabAPI :: Function *func_sym;
-		obj->findFuncByEntryOffset(func_sym, curAddr);
+		bool found = obj->findFuncByEntryOffset(func_sym, curAddr);
+		if (!found) continue; // Missing symbols move on to next function
 		vector <localVar *> parms;
 		func_sym->getParams(parms);
 		int num_parms = parms.size();
