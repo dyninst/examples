@@ -1,6 +1,6 @@
 // Example DataFlowAPI program; notes which arguments on x86_64 functions are unused
 //
-// William E. Cohen (wohen at redhat dot com)
+// William E. Cohen (wcohen at redhat dot com)
 //
 
 #include <dyninst/Symtab.h>
