@@ -48,7 +48,8 @@ load_cache(${Dyninst_DIR}
            Boost_LIBRARIES
            Boost_INCLUDE_DIRS
            Boost_LIBRARY_DIRS
-           Boost_DEFINES)
+           Boost_DEFINES
+           TBB_INCLUDE_DIRS)
 
 # Set default configuration type
 if(NOT CMAKE_BUILD_TYPE)
