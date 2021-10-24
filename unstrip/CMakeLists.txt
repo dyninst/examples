@@ -9,7 +9,7 @@ add_executable(unstrip
                fingerprint.C
                callback.C)
 
-target_include_directories(unstrip PRIVATE ${DYNINST_INCLUDE_DIR} ${DYNINST_Boost_INCLUDE_DIRS})
+target_include_directories(unstrip PRIVATE ${DYNINST_INCLUDE_DIR} ${DYNINST_Boost_INCLUDE_DIRS} ${DYNINST_TBB_INCLUDE_DIRS})
 target_compile_definitions(unstrip PRIVATE ${DYNINST_Boost_DEFINITIONS})
 
 target_link_directories(unstrip PRIVATE ${DYNINST_Boost_LIBRARY_DIRS})
