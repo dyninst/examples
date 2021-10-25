@@ -80,5 +80,8 @@ add_subdirectory(interceptOutput)
 add_subdirectory(maxMallocSize)
 add_subdirectory(disassemble)
 add_subdirectory(CFGraph)
+<<<<<<< HEAD
 add_subdirectory(DynC)
+=======
+>>>>>>> fc620757efa385e43243079b589ae3c5628422bf
 add_subdirectory(unusedArgs)
