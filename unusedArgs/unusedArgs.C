@@ -3,9 +3,9 @@
 // William E. Cohen (wcohen at redhat dot com)
 //
 
-#include <dyninst/Symtab.h>
-#include <dyninst/Function.h>
-#include <dyninst/liveness.h>
+#include "Symtab.h"
+#include "Function.h"
+#include "liveness.h"
 
 using namespace Dyninst;
 using namespace SymtabAPI;
