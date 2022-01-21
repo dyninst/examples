@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 3.13.0)
 project(examples)
-
 # User must provide location of Dyninst cmake files either as a cache or
 # environment variable
 if(NOT Dyninst_DIR)
@@ -82,3 +81,4 @@ add_subdirectory(disassemble)
 add_subdirectory(CFGraph)
 add_subdirectory(DynC)
 add_subdirectory(unusedArgs)
+add_subdirectory(symtabAPITest)
