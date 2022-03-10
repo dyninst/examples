@@ -1,25 +1,4 @@
-cmake_minimum_required(VERSION 3.13.0)
 project(tracetool LANGUAGES CXX)
-
-# Import the Dyninst components
-find_package(Dyninst REQUIRED
-             COMPONENTS common
-                        dyninstAPI
-                        instructionAPI
-                        parseAPI
-                        symtabAPI
-                        common)
-
-# Read the cache generated from building Dyninst
-load_cache(${Dyninst_DIR}
-           READ_WITH_PREFIX DYNINST_
-           Boost_LIBRARIES
-           Boost_INCLUDE_DIRS
-           Boost_LIBRARY_DIRS
-           Boost_DEFINES
-           TBB_INCLUDE_DIRS)
-
-set(WARNINGS -Wall -Wextra -Wconversion -Wsign-conversion -pedantic)
 
 # Mutator
 add_executable(trace_tool tracetool.cpp)
