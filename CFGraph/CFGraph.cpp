@@ -6,7 +6,6 @@
 #include "CFG.h"
 #include "CodeObject.h"
 #include <algorithm>
-#include <array>
 #include <sstream>
 #include <string>
 #include <unordered_set>
