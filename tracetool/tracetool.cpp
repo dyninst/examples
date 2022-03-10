@@ -1,12 +1,12 @@
 #include <iostream>
 
-#include "BPatch_process.h"
+#include "BPatch.h"
 #include "BPatch_function.h"
 #include "BPatch_image.h"
-#include "BPatch_type.h"
 #include "BPatch_point.h"
+#include "BPatch_process.h"
 #include "BPatch_thread.h"
-#include "BPatch.h"
+#include "BPatch_type.h"
 
 BPatch_process *appThread;
 BPatch_image *appImage;
@@ -18,7 +18,7 @@ BPatch_function *traceExitFunc;
 
 void showModsFuncs(BPatch_process *appThread);
 
-BPatch_function *findFunc(char const*str) {
+BPatch_function *findFunc(char const *str) {
   BPatch_Vector<BPatch_function *> *funcBuf =
       new BPatch_Vector<BPatch_function *>;
   appImage->findFunction(str, *funcBuf);
@@ -34,12 +34,13 @@ void initTraceLibrary() {
   const char *tracetool_lib = getenv("TRACETOOL_LIB");
   if (tracetool_lib == nullptr) {
     std::cerr << "Need to set environment variable TRACETOOL_LIB to use "
-         << "tracetool\n";
+              << "tracetool\n";
     exit(1);
   }
 
   if (!appThread->loadLibrary(tracetool_lib)) {
-    std::cerr << "failed when attempting to load library " << tracetool_lib << std::endl;
+    std::cerr << "failed when attempting to load library " << tracetool_lib
+              << std::endl;
     exit(1);
   }
 
@@ -67,7 +68,7 @@ void instrument_entry(BPatch_function *func, char *funcname) {
   BPatch_constExpr descArg("...desc...");
   BPatch_constExpr numFuncArgs(num_args);
   BPatch_paramExpr argOne(0);
-  BPatch_constExpr nullptrArgOne(static_cast<void*>(nullptr));
+  BPatch_constExpr nullptrArgOne(static_cast<void *>(nullptr));
   BPatch_constExpr argType(argOneType);
 
   traceFuncArgs.push_back(&funcName);
@@ -146,8 +147,8 @@ void instrument_callsites(BPatch_function *func, char *callee_funcname) {
     BPatch_function *callsite_func = callsite_point->getCalledFunction();
     if (callsite_func == nullptr) {
       std::cerr << "    skipping instrumentation for callsite in function \n"
-           << "    " << callee_funcname
-           << " since can't determine callee at callsite\n";
+                << "    " << callee_funcname
+                << " since can't determine callee at callsite\n";
       continue;
     }
     instrument_callsite(callee_funcname, callsite_func, callsite_point);
@@ -199,13 +200,15 @@ void instrument_funcs_in_module(BPatch_module *mod) {
     BPatch_function *func = (*allprocs)[i];
     func->getName(name, 99);
 
-    std::cout << "  instrumenting function #" << i + 1 << ":  " << name << std::endl;
+    std::cout << "  instrumenting function #" << i + 1 << ":  " << name
+              << std::endl;
     instrument_entry(func, name);
     instrument_exit(func, name);
     instrument_callsites(func, name);
   }
 }
 
+// clang-format off
 void usage() {
   fprintf(stderr, "Usage: tracetool [-p<pid>] program [prog-arguments]\n");
   fprintf(stderr, "       -p: specify process id of program, for attaching\n");
@@ -214,12 +217,16 @@ void usage() {
   fprintf(stderr, "       (need to set environment variable TRACETOOL_LIB to "
                   "\n        path of trace library)\n");
 }
+// clang-format on
 
 void postForkFunc(BPatch_thread *parent, BPatch_thread *child) {
-  std::cerr << "###############################################################\n";
-  std::cerr << "tool:  a fork occurred, parent pid: " << parent->getProcess()->getPid()
-       << ", child pid: " << child->getProcess()->getPid() << std::endl;
-  std::cerr << "###############################################################\n";
+  std::cerr
+      << "###############################################################\n";
+  std::cerr << "tool:  a fork occurred, parent pid: "
+            << parent->getProcess()->getPid()
+            << ", child pid: " << child->getProcess()->getPid() << std::endl;
+  std::cerr
+      << "###############################################################\n";
   parent->getProcess()->continueExecution();
   child->getProcess()->continueExecution();
   std::cerr << "done with postForkFunc\n";
@@ -227,18 +234,13 @@ void postForkFunc(BPatch_thread *parent, BPatch_thread *child) {
 
 // End the sequence with a nullptr
 // should_instrument_module is expecting these to all be in lowercase
-char const*excluded_modules[] = {"default_module",
-                            "libstdc++",
-                            "libm",
-                            "libc",
-                            "ld-linux",
-                            "libdyninstapi_rt",
-                            "libdl",
-                            "tracelib",
-                            "kernel",
-                            ".so.",
-                            "global_linkage", // AIX modules
-                            nullptr};
+char const *excluded_modules[] = {"default_module", "libstdc++",
+                                  "libm",           "libc",
+                                  "ld-linux",       "libdyninstapi_rt",
+                                  "libdl",          "tracelib",
+                                  "kernel",         ".so.",
+                                  "global_linkage", // AIX modules
+                                  nullptr};
 
 void mystrlwr(char *str) {
   for (char *c = str; (*c) != 0; c++) {
@@ -246,13 +248,13 @@ void mystrlwr(char *str) {
   }
 }
 
-bool should_instrument_module(char const*mod_input) {
+bool should_instrument_module(char const *mod_input) {
   int i = 0;
   char modname[100];
   strcpy(modname, mod_input);
   mystrlwr(modname);
   while (i < 1000) {
-    char const*cur_mod = excluded_modules[i];
+    char const *cur_mod = excluded_modules[i];
     if (cur_mod == nullptr)
       break;
     if (strstr(modname, cur_mod))
@@ -263,7 +265,7 @@ bool should_instrument_module(char const*mod_input) {
 }
 
 void handleArguments(int argc, char *argv[], bool *show_usage, int *pid,
-                     char **program, char const*prog_args[]) {
+                     char **program, char const *prog_args[]) {
   *pid = 0;
   *show_usage = false;
   // start at argument 1, that is skip the program name, because we don't
@@ -299,7 +301,7 @@ int main(int argc, char *argv[]) {
   bool show_usage;
   int pid = 0;
 
-  char const*prog_args[50]; // maximum of 50 program arguments
+  char const *prog_args[50]; // maximum of 50 program arguments
   char *program_path;
 
   handleArguments(argc, argv, &show_usage, &pid, &program_path, prog_args);
@@ -313,10 +315,11 @@ int main(int argc, char *argv[]) {
 
   if (pid > 0) { // attach case
     std::cerr << "Attaching to process " << program_path << " with pid " << pid
-         << std::endl;
+              << std::endl;
     appThread = bpatch.processAttach(program_path, pid);
   } else { // create case
-    std::cerr << "Creating process " << program_path << " with specified args\n";
+    std::cerr << "Creating process " << program_path
+              << " with specified args\n";
     appThread = bpatch.processCreate(program_path, prog_args);
   }
 
@@ -331,7 +334,8 @@ int main(int argc, char *argv[]) {
     BPatch_module *mod = (*mbuf)[n];
     char modname[100];
     mod->getName(modname, 99);
-    std::cout << "Program Module " << modname << " ------------------" << std::endl;
+    std::cout << "Program Module " << modname << " ------------------"
+              << std::endl;
     if (should_instrument_module(modname)) {
       instrument_funcs_in_module(mod);
     }
