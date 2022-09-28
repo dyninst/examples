@@ -76,6 +76,7 @@ int main(int argc, char **argv){
 			crtAddr += instr.size();
 			instr_count++;
 		}
+        cout << endl;
 	}
 	return 0;
 }

@@ -74,7 +74,7 @@ int main(int argc, char **argv){
         for( const auto & symbol : symbols){
             uint32_t offset = symbol->getOffset();
             uint32_t size = symbol->getSize();
-            std::cout << "symbol id = " << sid << "  name = " << symbol->getMangledName() << std::hex <<" offset = "<< offset << " size = " << size << std::endl;
+            std::cout << "symbol id = " << sid << "  name = " << symbol->getMangledName() << std::hex <<" offset = "<< offset << " type = " << symbol->getType() << " size = " << size << std::endl;
             sid++;
         }
 
