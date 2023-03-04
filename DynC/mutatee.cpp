@@ -1,7 +1,7 @@
 #include <iostream>
 
 int hi = 0;
-int zarray[0];
+int zarray[1];
 int array[5] = {1, 2, 3, 4, 5};
 int array2[5] = {6, 7, 8, 9, 10};
 int arrayField = array[2];

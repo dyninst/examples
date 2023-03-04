@@ -55,7 +55,7 @@ bool DescriptorDatabase::build()
         return false;
     }
 
-    int MAXLEN = 1024;
+    const int MAXLEN = 1024;
 
     char cur[MAXLEN];
     const char * delim = ";";
