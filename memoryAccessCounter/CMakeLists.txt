@@ -1,8 +1,8 @@
 project(memoryAccessCounter LANGUAGES CXX)
 
 add_executable(counter counter.cpp)
-target_include_directories(counter PRIVATE ${DYNINST_INCLUDE_DIR} ${DYNINST_Boost_INCLUDE_DIRS} ${DYNINST_TBB_INCLUDE_DIRS})
-target_link_libraries(counter dyninstAPI instructionAPI ${DYNINST_Boost_LIBRARIES})
+target_compile_options(counter PRIVATE ${EXAMPLES_WARNING_FLAGS})
+target_link_libraries(counter Dyninst::dyninstAPI)
 
 install(TARGETS InterestingProgram  RUNTIME DESTINATION ${PROJECT_BINARY_DIR})
 
