@@ -24,6 +24,7 @@ int main() {
     i = count(i);
     ++hi;
     r = hi * 10;
+    (void)r;
   }
 }
 
