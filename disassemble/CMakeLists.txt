@@ -1,31 +1,9 @@
 project(unstrip LANGUAGES CXX)
 
-add_executable(disassemble
-               disassemble.cpp)
+add_executable(disassemble disassemble.cpp)
+target_compile_options(disassemble PRIVATE ${EXAMPLES_WARNING_FLAGS})
+target_link_libraries(disassemble Dyninst::dyninstAPI)
 
-target_include_directories(disassemble PRIVATE ${DYNINST_INCLUDE_DIR} ${DYNINST_Boost_INCLUDE_DIRS} ${DYNINST_TBB_INCLUDE_DIRS})
-target_compile_definitions(disassemble PRIVATE ${DYNINST_Boost_DEFINITIONS})
-
-target_link_directories(disassemble PRIVATE ${DYNINST_Boost_LIBRARY_DIRS})
-target_link_libraries(disassemble
-                      dyninstAPI
-                      instructionAPI
-                      parseAPI
-                      symtabAPI
-                      common
-                      ${DYNINST_Boost_LIBRARIES}
-                      )
-
-add_executable(unknown_instruction
-               unknown_instruction.cpp)
-
-target_include_directories(unknown_instruction PRIVATE ${DYNINST_INCLUDE_DIR} ${DYNINST_Boost_INCLUDE_DIRS} ${DYNINST_TBB_INCLUDE_DIRS})
-target_link_directories(unknown_instruction PRIVATE ${DYNINST_Boost_LIBRARY_DIRS})
-target_link_libraries(unknown_instruction
-                      dyninstAPI
-                      instructionAPI
-                      parseAPI
-                      symtabAPI
-                      common
-                      ${DYNINST_Boost_LIBRARIES}
-                      )
+add_executable(unknown_instruction unknown_instruction.cpp)
+target_compile_options(disassemble PRIVATE ${EXAMPLES_WARNING_FLAGS})
+target_link_libraries(disassemble Dyninst::dyninstAPI)
