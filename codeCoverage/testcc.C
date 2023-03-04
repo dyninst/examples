@@ -18,7 +18,7 @@ void one(int callThree, int callLib) {
     external(callThree);
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *[]) {
   int callThree = 0, callLib = 0;
 
   if (argc >= 2) {
