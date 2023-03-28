@@ -8,8 +8,9 @@ namespace ia = Dyninst::InstructionAPI;
 using id = ia::InstructionDecoder;
 using ui = id::unknown_instruction;
 
-ui::replacement unknown_instruction_handler(id::buffer b) {
-  std::cout << "\n\nUnknown instruction encountered in byte sequence: [ ";
+ia::Instruction unknown_instruction_handler(id::buffer b, Dyninst::Address addr) {
+  std::cout << "\n\nUnknown instruction encountered in byte sequence starting at address "
+		    << std::hex << addr << ": [";
   auto *begin = b.start;
   while(begin != b.end) {
     std::cout << std::hex << static_cast<int>(*begin) << ' ';
@@ -17,25 +18,13 @@ ui::replacement unknown_instruction_handler(id::buffer b) {
   }
   std::cout << "]\n";
   
-  // x86 nop
-  unsigned char nop[2] = {0x1F, 0x0F};
-  
-  // In this case, we're only consuming a single byte from the input
-  size_t bytes_consumed = 1;
-  
-  // but we're returning a two-byte instruction
-  size_t ins_size = 2;
-  
-  std::cout << "\tReturning a nop\n\n";
-  
-  ia::Instruction ret {
+  // Return a multi-byte pseudo-NOP sequence
+  return {
     {e_nop, "nop", Dyninst::Architecture::Arch_x86_64},
-    ins_size,
-    nop,
+    5,
+    b.start,
     Dyninst::Architecture::Arch_x86_64
   };
-
-  return {std::move(ret), bytes_consumed};
 }
 
 int main() {
