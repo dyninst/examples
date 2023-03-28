@@ -3,6 +3,7 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
+#include <cstdint>
 
 namespace ia = Dyninst::InstructionAPI;
 using id = ia::InstructionDecoder;
@@ -39,6 +40,11 @@ int main() {
     0x74, 0x10                    // JZ +0x10(8)
   };
   
+  std::cout << "Decoding buffer starting at address 0x"
+		    << std::hex
+		    << reinterpret_cast<std::uint64_t>(buffer.data())
+			<< "\n\n";
+
   ia::InstructionDecoder decoder(
       buffer.data(), buffer.size(),
       Dyninst::Architecture::Arch_x86_64
