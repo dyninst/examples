@@ -28,11 +28,14 @@ ia::Instruction unknown_instruction_handler(id::buffer b, Dyninst::Address addr)
 }
 
 int main() {
-  std::array<const unsigned char, 9> buffer =
+  // The "unknown" instruction here starts with 0xd6 which is specified in the
+  // Intel manual as an Illegal Instruction. We append four zero bytes to
+  // simulate a 'long' NOP allowed by the Intel Dev Manual.
+  std::array<const unsigned char, 13> buffer =
   {
     0x05, 0xef, 0xbe, 0xad, 0xde, // ADD eAX, 0xDEADBEEF
     0x50,                         // PUSH rAX
-    0xd6,                         // Illegal instruction
+    0xd6, 0x00, 0x00, 0x00, 0x00, // Unknown instruction; length = 5 bytes
     0x74, 0x10                    // JZ +0x10(8)
   };
   
