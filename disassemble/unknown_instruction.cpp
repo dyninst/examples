@@ -4,6 +4,7 @@
 #include <iomanip>
 #include <string>
 #include <cstdint>
+#include <sstream>
 
 namespace ia = Dyninst::InstructionAPI;
 using id = ia::InstructionDecoder;
@@ -16,7 +17,7 @@ ia::Instruction unknown_instruction_handler(id::buffer b) {
     std::cout << std::hex << static_cast<int>(*begin) << ' ';
     ++begin;
   }
-  std::cout << "]\n";
+  std::cout << "]\n\n";
   
   // Return a multi-byte pseudo-NOP sequence
   return {
@@ -57,11 +58,12 @@ int main() {
     i = decoder.decode();
     if(i.isValid()) {
       auto const* beg = static_cast<unsigned char const*>(i.ptr());
-      std::cout << std::hex << std::showbase;
+      std::stringstream s;
+      s << std::hex << std::showbase;
       for(auto end = beg+i.size(); beg!=end; ++beg) {
-        std::cout << static_cast<int>(*beg) << ' ';
+        s << static_cast<int>(*beg) << ' ';
       }
-      std::cout << i.format() << "\n";
+      std::cout << std::left << std::setw(24) << s.str() << " | " << i.format() << "\n";
     }
   }
   while(i.isValid());
