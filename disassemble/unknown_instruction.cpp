@@ -9,9 +9,8 @@ namespace ia = Dyninst::InstructionAPI;
 using id = ia::InstructionDecoder;
 using ui = id::unknown_instruction;
 
-ia::Instruction unknown_instruction_handler(id::buffer b, Dyninst::Address addr) {
-  std::cout << "\n\nUnknown instruction encountered in byte sequence starting at address "
-		    << std::hex << addr << ": [";
+ia::Instruction unknown_instruction_handler(id::buffer b) {
+  std::cout << "\nUnknown instruction encountered in byte sequence [";
   auto *begin = b.start;
   while(begin != b.end) {
     std::cout << std::hex << static_cast<int>(*begin) << ' ';
