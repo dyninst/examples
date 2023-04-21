@@ -1,0 +1,25 @@
+name: Builds
+
+on:
+  pull_request:
+     branches:
+        - master
+jobs:
+  gcc:
+    permissions:
+      packages: read
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/dyninst/amd64/ubuntu-20.04:latest
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.github_token }}
+    name: gcc
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Build
+        run: |
+           cmake . -DDyninst_DIR=/dyninst/install/lib/cmake/Dyninst
+           cmake --build .
