@@ -1,4 +1,4 @@
-project(DynC)
+project(DynC LANGUAGES CXX)
 
 add_executable(dync_mutatee mutatee.cpp)
 target_compile_options(dync_mutatee PRIVATE ${EXAMPLES_WARNING_FLAGS})
