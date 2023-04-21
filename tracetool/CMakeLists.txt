@@ -12,6 +12,3 @@ target_compile_options(tracelib PRIVATE ${EXAMPLES_WARNING_FLAGS})
 # Mutatee
 add_library(userapp SHARED userapp.cpp)
 target_compile_options(userapp PRIVATE ${EXAMPLES_WARNING_FLAGS})
-
-# A dummy target to allow building this example by itself
-add_custom_target(tracetool DEPENDS trace_tool tracelib userapp)
