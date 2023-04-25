@@ -139,6 +139,8 @@ void parse_options(int argc, char** argv)
                 break;
             default:
                 printf("Illegal option %c\n",ch);
+                usage(argv[0]);
+                break;
             case 'h':
                 usage(argv[0]);
                 exit(1);

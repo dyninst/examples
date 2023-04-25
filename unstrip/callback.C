@@ -52,7 +52,7 @@ InstrCallback::InstrCallback(Address _s, Fingerprint * _f) :
  * Record system calls found during binary parsing.
  */
 void InstrCallback::instruction_cb(ParseAPI::Function * f,
-        ParseAPI::Block* b,
+        ParseAPI::Block*,
         Address addr,
         insn_details* insnDetails)
 {

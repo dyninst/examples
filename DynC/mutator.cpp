@@ -84,7 +84,7 @@ int main() {
       return -1;
     }
     std::cout << "Snippet inserted\n";
-    std::cout << "Point's function is " << entry.first->getFunction()->getName(), "\n";
+    std::cout << "Point's function is " << entry.first->getFunction()->getName() << "\n";
     BPatchSnippetHandle *handle = appProc->insertSnippet(*entry.second, *entry.first);
     std::cout << "Handle is " << ((!handle) ? "null" : "not null") << "\n";
   }

@@ -50,7 +50,7 @@ std::vector<BPatch_point*>* findPoint(BPatch_addressSpace* app,
 		const char* name, 
 		BPatch_procedureLocation loc) {
     std::vector<BPatch_function*> functions;
-    std::vector<BPatch_point*>* points;
+    std::vector<BPatch_point*>* points{};
 
     // Scan for functions named "name"
     BPatch_image* appImage = app->getImage();

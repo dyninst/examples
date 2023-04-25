@@ -77,7 +77,7 @@ void Matches::clear()
    m.clear(); 
 }
 
-string Matches::operator[](const int pos) const
+string Matches::operator[](const int) const
 {
     return *(m.begin());
 }

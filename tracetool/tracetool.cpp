@@ -95,7 +95,6 @@ void instrument_entry(BPatch_function *func, char *funcname) {
 void instrument_callsite(char *callee_funcname, BPatch_function *callsite_func,
                          BPatch_point *callsite_point) {
   BPatch_Vector<BPatch_localVar *> *params = callsite_func->getParams();
-  char buf[100];
   int num_args = 0;
   if (params != nullptr)
     num_args = (*params).size();
@@ -142,8 +141,7 @@ void instrument_callsite(char *callee_funcname, BPatch_function *callsite_func,
 void instrument_callsites(BPatch_function *func, char *callee_funcname) {
   BPatch_Vector<BPatch_point *> *callsites = func->findPoint(BPatch_subroutine);
 
-  for (int i = 0; i < (*callsites).size(); i++) {
-    BPatch_point *callsite_point = (*callsites)[i];
+  for (auto *callsite_point : *callsites) {
     BPatch_function *callsite_func = callsite_point->getCalledFunction();
     if (callsite_func == nullptr) {
       std::cerr << "    skipping instrumentation for callsite in function \n"
@@ -182,9 +180,8 @@ void instrument_exit(BPatch_function *func, char *funcname) {
     return;
   }
 
-  for (int i = 0; i < (*exitPointBuf).size(); i++) {
+  for (auto *curExitPt : *exitPointBuf) {
     std::cerr << "   inserting an exit pt instrumentation\n";
-    BPatch_point *curExitPt = (*exitPointBuf)[i];
 
     BPatch_funcCallExpr traceExitCall(*traceExitFunc, traceFuncArgs);
     appThread->insertSnippet(traceExitCall, *curExitPt, BPatch_callAfter,
@@ -302,7 +299,7 @@ int main(int argc, char *argv[]) {
   int pid = 0;
 
   char const *prog_args[50]; // maximum of 50 program arguments
-  char *program_path;
+  char *program_path{};
 
   handleArguments(argc, argv, &show_usage, &pid, &program_path, prog_args);
   if (show_usage) {

@@ -8,16 +8,5 @@ add_executable(unstrip
                database.C
                fingerprint.C
                callback.C)
-
-target_include_directories(unstrip PRIVATE ${DYNINST_INCLUDE_DIR} ${DYNINST_Boost_INCLUDE_DIRS} ${DYNINST_TBB_INCLUDE_DIRS})
-target_compile_definitions(unstrip PRIVATE ${DYNINST_Boost_DEFINITIONS})
-
-target_link_directories(unstrip PRIVATE ${DYNINST_Boost_LIBRARY_DIRS})
-target_link_libraries(unstrip
-                      dyninstAPI
-                      instructionAPI
-                      parseAPI
-                      symtabAPI
-                      common
-                      ${DYNINST_Boost_LIBRARIES}
-                      )
+target_compile_options(unstrip PRIVATE ${EXAMPLES_WARNING_FLAGS})
+target_link_libraries(unstrip PRIVATE Dyninst::dyninstAPI)

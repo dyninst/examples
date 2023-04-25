@@ -276,7 +276,6 @@ int main(int argc, char *argv[]) {
 
   vector<BPatch_module *> *modules = appImage->getModules();
   vector<BPatch_module *>::iterator moduleIter;
-  BPatch_module *defaultModule;
 
   BPatch_Vector<BPatch_snippet *> registerCalls;
 
@@ -294,14 +293,6 @@ int main(int argc, char *argv[]) {
         //                cout << "Skipping library: " << moduleName << endl;
         continue;
       }
-    }
-
-    /* Every binary has one default module.
-     * code coverage initialize and finalize functions should be called only
-     * once.
-     * Hence call them from the default module */
-    if (string(moduleName).find("DEFAULT_MODULE") != string::npos) {
-      defaultModule = (*moduleIter);
     }
 
     cout << "Instrumenting module: " << moduleName << endl;
