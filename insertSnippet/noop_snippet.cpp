@@ -15,7 +15,7 @@ namespace dpa = Dyninst::PatchAPI;
 class NoopSnippet : public dpa::Snippet {
 public:
   bool generate(dpa::Point *pt, Dyninst::Buffer &buffer) override {
-    uint8_t byte = 0x90;
+    uint32_t byte = 0xbf800000;
     std::cout << "inserting a no op @" << pt << std::endl;
     for (int i = 0; i < 10; i++) {
       buffer.push_back(byte);
@@ -79,6 +79,7 @@ int main(int argc, const char *argv[]) {
     for (dpa::Point *point : f_entryPoints) {
       std::cerr << "Patching @ " << point << std::endl;
       patcher.add(dpa::PushBackCommand::create(point, snippet));
+      break;
     }
   }
 
