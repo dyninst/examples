@@ -9,6 +9,7 @@ set(EXAMPLES_WARNING_FLAGS -Wall -Wextra)
 
 add_subdirectory(CFGraph)
 add_subdirectory(codeCoverage)
+add_subdirectory(dataflowAPI)
 add_subdirectory(disassemble)
 add_subdirectory(DynC)
 add_subdirectory(instrumentAFunction)
