@@ -7,6 +7,7 @@ add_executable(InterestingProgram common/mutatees/InterestingProgram.cpp)
 
 set(EXAMPLES_WARNING_FLAGS -Wall -Wextra)
 
+add_subdirectory(branchInfo)
 add_subdirectory(CFGraph)
 add_subdirectory(codeCoverage)
 add_subdirectory(disassemble)
