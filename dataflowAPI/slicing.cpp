@@ -43,8 +43,9 @@ void AnalyzeJumpTarget(pa::Function *f, pa::Block *b) {
   // Here we look for the assignment that changes the PC.
   Dyninst::Assignment::Ptr pcAssign;
   for (auto a : assignments) {
-    Dyninst::AbsRegion const& out = a->out();
-    if (out.absloc().type() == Dyninst::Absloc::Register && out.absloc().reg().isPC()) {
+    Dyninst::AbsRegion const &out = a->out();
+    if (out.absloc().type() == Dyninst::Absloc::Register &&
+        out.absloc().reg().isPC()) {
       pcAssign = a;
       break;
     }
