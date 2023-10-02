@@ -82,7 +82,7 @@ int main(int argc, const char *argv[]) {
         for (dpa::Point *point : f_entryPoints) {
             std::cerr << "Patching @ " << point << std::endl;
             auto instr = point->insn();
-            if (instr.getOperation().getID() == amdgpu_gfx908_op_S_LOAD_DWORDX2){
+            if (instr.getOperation().getID() == amdgpu_gfx908_op_S_LOAD_DWORDX2 || instr.getOperation().getID() == amdgpu_gfx90a_op_S_LOAD_DWORDX2){
                 patcher.add(dpa::PushBackCommand::create(point, snippet));
             }
         }
