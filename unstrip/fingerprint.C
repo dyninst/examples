@@ -38,6 +38,7 @@
 #include "util.h"
 #include "database.h"
 #include "predicates.h"
+#include "dyn_regs.h"
 
 using namespace std;
 using namespace Dyninst;
