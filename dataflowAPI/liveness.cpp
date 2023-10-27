@@ -1,7 +1,7 @@
 #include "liveness.h"
 #include "Location.h"
 #include "bitArray.h"
-
+#include "registers/x86_64_regs.h"
 #include <cstdio>
 
 namespace pa = Dyninst::ParseAPI;

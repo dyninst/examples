@@ -33,7 +33,6 @@
 #define __CALLBACK_H__
 
 #include "dyntypes.h"
-#include "dyn_regs.h"
 #include "InstructionAdapter.h"
 #include "CodeObject.h"
 #include "CFG.h"

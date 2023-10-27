@@ -6,6 +6,7 @@
 #include "Symtab.h"
 #include "Function.h"
 #include "liveness.h"
+#include "registers/x86_64_regs.h"
 
 using namespace Dyninst;
 using namespace SymtabAPI;

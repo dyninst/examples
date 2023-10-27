@@ -48,6 +48,7 @@
 #include "CodeSource.h"
 #include "CodeObject.h"
 #include "CFG.h"
+#include "registers/x86_regs.h"
 
 // symtabAPI
 #include "Function.h"
