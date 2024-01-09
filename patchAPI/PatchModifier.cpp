@@ -13,7 +13,7 @@ namespace dp = Dyninst::ParseAPI;
 namespace pa = Dyninst::PatchAPI;
 
 /*
- * Insert an x86 nop slide in every function
+ * Remove a function from the CFG.
  */
 
 int main(int argc, char* argv[]) {
