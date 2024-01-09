@@ -28,7 +28,7 @@ struct stateful_visitor : di::Visitor {
 
   void visit(di::BinaryFunction*) override { foundBin = true; }
 
-  void visit(di::Immediate* imm) override { foundImm = true; }
+  void visit(di::Immediate*) override { foundImm = true; }
 
   void visit(di::RegisterAST*) override { foundReg = true; }
 
