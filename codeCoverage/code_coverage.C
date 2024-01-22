@@ -42,8 +42,8 @@ static const char *USAGE = " [-bpsa] <binary> <output binary>\n \
 static const char *OPT_STR = "bpsa";
 
 // configuration options
-char *inBinary = NULL;
-char *outBinary = NULL;
+char const*inBinary = NULL;
+char const*outBinary = NULL;
 bool includeSharedLib = false;
 int printAll = 0;
 bool bbCoverage = false;
@@ -118,7 +118,7 @@ bool parseArgs(int argc, char *argv[]) {
   return true;
 }
 
-BPatch_function *findFuncByName(BPatch_image *appImage, char *funcName) {
+BPatch_function *findFuncByName(BPatch_image *appImage, char const*funcName) {
   /* fundFunctions returns a list of all functions with the name 'funcName' in
    * the binary */
   BPatch_Vector<BPatch_function *> funcs;
@@ -132,7 +132,7 @@ BPatch_function *findFuncByName(BPatch_image *appImage, char *funcName) {
 }
 
 bool insertFuncEntry(BPatch_binaryEdit *appBin, BPatch_function *curFunc,
-                     char *funcName, BPatch_function *instIncFunc, int funcId) {
+                     char const*funcName, BPatch_function *instIncFunc, int funcId) {
   /* Find the instrumentation points */
   vector<BPatch_point *> *funcEntry = curFunc->findPoint(BPatch_entry);
   if (NULL == funcEntry) {
@@ -160,7 +160,7 @@ bool insertFuncEntry(BPatch_binaryEdit *appBin, BPatch_function *curFunc,
 }
 
 bool insertBBEntry(BPatch_binaryEdit *appBin, BPatch_function *curFunc,
-                   char *funcName, const char *moduleName,
+                   char const*funcName, char const*moduleName,
                    BPatch_function *instBBIncFunc, BPatch_function *registerBB,
                    int *bbIndex,
                    BPatch_Vector<BPatch_snippet *> *registerCalls) {
@@ -254,16 +254,16 @@ int main(int argc, char *argv[]) {
   BPatch_image *appImage = appBin->getImage();
   /* Find code coverage functions in the instrumentation library */
   BPatch_function *instInitFunc =
-      findFuncByName(appImage, (char *)"initCoverage");
+      findFuncByName(appImage, "initCoverage");
   BPatch_function *registerFunc =
-      findFuncByName(appImage, (char *)"registerFunc");
+      findFuncByName(appImage, "registerFunc");
   BPatch_function *instIncFunc =
-      findFuncByName(appImage, (char *)"incFuncCoverage");
-  BPatch_function *registerBB = findFuncByName(appImage, (char *)"registerBB");
+      findFuncByName(appImage, "incFuncCoverage");
+  BPatch_function *registerBB = findFuncByName(appImage, "registerBB");
   BPatch_function *instBBIncFunc =
-      findFuncByName(appImage, (char *)"incBBCoverage");
+      findFuncByName(appImage, "incBBCoverage");
   BPatch_function *instExitFunc =
-      findFuncByName(appImage, (char *)"exitCoverage");
+      findFuncByName(appImage, "exitCoverage");
 
   if (!instInitFunc || !instIncFunc || !instExitFunc || !instBBIncFunc ||
       !registerFunc || !registerBB) {
