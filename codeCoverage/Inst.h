@@ -9,8 +9,8 @@
 #endif
 
 LIB_EXPORT void initCoverage(int, int);
-LIB_EXPORT void registerFunc(int, char *, char *);
-LIB_EXPORT void registerBB(int, char *, char *, unsigned long);
+LIB_EXPORT void registerFunc(int, char const*, char const*);
+LIB_EXPORT void registerBB(int, char const*, char const*, unsigned long);
 LIB_EXPORT void incFuncCoverage(int);
 LIB_EXPORT void incBBCoverage(int);
 LIB_EXPORT void exitCoverage(int, int, int);

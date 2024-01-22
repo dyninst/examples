@@ -78,7 +78,7 @@ void initCoverage(int totalFuncs, int totalBBs) {
 }
 
 // Populates a record for a function
-void registerFunc(int id, char *name, char *modName) {
+void registerFunc(int id, char const* name, char const* modName) {
   if (!enabled)
     return;
   funcs[id].funcName = name;
@@ -87,7 +87,7 @@ void registerFunc(int id, char *name, char *modName) {
 }
 
 // Populates a record for a basic block
-void registerBB(int id, char *name, char *modName, unsigned long addr) {
+void registerBB(int id, char const* name, char const* modName, unsigned long addr) {
   if (!enabled)
     return;
   bbs[id].funcName = name;
