@@ -3,8 +3,8 @@
 // William E. Cohen (wcohen at redhat dot com)
 //
 
-#include "Function.h"
 #include "Symtab.h"
+#include "Function.h"
 #include "liveness.h"
 
 using namespace Dyninst;

@@ -29,18 +29,15 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
-#include "CFG.h"
-#include "CodeObject.h"
-#include "Instruction.h"
-#include "InstructionAdapter.h"
-#include "ParseCallback.h"
-#include "callback.h"
-#include "dyntypes.h"
-#include "fingerprint.h"
 #include "util.h"
-
-using namespace std;
-using namespace Dyninst;
+#include "callback.h"
+#include "fingerprint.h"
+#include "dyntypes.h"
+#include "InstructionAdapter.h"
+#include "CodeObject.h"
+#include "CFG.h"
+#include "ParseCallback.h"
+#include "Instruction.h"
 
 InstrCallback::InstrCallback(Address _s, Fingerprint* _f) : syscallTrampStore(_s), fingerprint(_f) {}
 
