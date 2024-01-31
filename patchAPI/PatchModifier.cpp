@@ -1,10 +1,11 @@
+#include "PatchModifier.h"
+
 #include "AddrSpace.h"
 #include "CFG.h"
 #include "CodeObject.h"
 #include "PatchCFG.h"
 #include "PatchMgr.h"
 #include "PatchObject.h"
-#include "PatchModifier.h"
 
 #include <iostream>
 #include <vector>
@@ -38,7 +39,7 @@ int main(int argc, char* argv[]) {
 
   auto const* func_to_remove = "InterestingProcedure";
   auto found = std::find_if(functions.begin(), functions.end(),
-      [func_to_remove](pa::PatchFunction* p) { return p->name() == func_to_remove;});
+                            [func_to_remove](pa::PatchFunction* p) { return p->name() == func_to_remove; });
 
   if(found == functions.end()) {
     std::cerr << "Couldn't find '" << func_to_remove << "'\n";

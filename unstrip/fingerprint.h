@@ -37,6 +37,7 @@
 #include <stack>
 #include <vector>
 
+#include "Absloc.h"
 #include "database.h"
 
 using namespace std;

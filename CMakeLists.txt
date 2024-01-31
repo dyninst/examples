@@ -1,7 +1,8 @@
 cmake_minimum_required(VERSION 3.13.0)
 project(examples)
 
-find_package(Dyninst 12.3.0 REQUIRED COMPONENTS dyninstAPI dynC_API parseAPI symtabAPI patchAPI)
+find_package(Dyninst 12.3.0 REQUIRED COMPONENTS dyninstAPI dynC_API parseAPI
+                                                symtabAPI patchAPI)
 
 add_executable(InterestingProgram common/mutatees/InterestingProgram.cpp)
 

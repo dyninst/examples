@@ -2,10 +2,9 @@
 #include "procstate.h"
 #include "walker.h"
 
+#include <sys/select.h>
 #include <thread>
 #include <vector>
-
-#include <sys/select.h>
 
 // Collect a stack walk every five seconds.
 

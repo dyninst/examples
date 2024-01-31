@@ -1,5 +1,6 @@
-#include "CFG.h"
 #include "CFGMaker.h"
+
+#include "CFG.h"
 #include "PatchCFG.h"
 
 #include <iostream>
@@ -13,16 +14,16 @@ namespace pa = Dyninst::PatchAPI;
  */
 
 struct FunctionTracer : pa::PatchFunction {
-  FunctionTracer(dp::Function *f, pa::PatchObject* o) : pa::PatchFunction(f, o) {
+  FunctionTracer(dp::Function* f, pa::PatchObject* o) : pa::PatchFunction(f, o) {
     std::cout << "Making function " << f->name() << '\n';
   }
 };
 
 class CFGTracer : public pa::CFGMaker {
- public:
-   pa::PatchFunction* makeFunction(dp::Function *f, pa::PatchObject* o) override {
-     return new FunctionTracer(f, o);
-   }
+public:
+  pa::PatchFunction* makeFunction(dp::Function* f, pa::PatchObject* o) override {
+    return new FunctionTracer(f, o);
+  }
 };
 
 int main(int argc, char* argv[]) {

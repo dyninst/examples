@@ -17,7 +17,7 @@ void edge(dp::Function* func) {
 
     dp::Block::edgelist const& targets = block->targets();
 
-    for(dp::Edge *e : targets) {
+    for(dp::Edge* e : targets) {
       if(intra_pred.pred_impl(e)) {
         // Examine the Intraprocedural edge
       }

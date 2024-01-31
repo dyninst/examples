@@ -1,8 +1,8 @@
 #include "CFG.h"
 #include "CFGMaker.h"
 #include "PatchCFG.h"
-#include "PatchMgr.h"
 #include "PatchCommon.h"
+#include "PatchMgr.h"
 
 #include <iostream>
 
@@ -21,10 +21,10 @@ struct PointTracer : pa::Point {
 };
 
 class PointMakerTracer : public pa::PointMaker {
- public:
-   pa::Point* mkFuncPoint(pa::Point::Type t, pa::PatchMgrPtr m, pa::PatchFunction *f) override {
-     return new PointTracer(t, m, f);
-   }
+public:
+  pa::Point* mkFuncPoint(pa::Point::Type t, pa::PatchMgrPtr m, pa::PatchFunction* f) override {
+    return new PointTracer(t, m, f);
+  }
 };
 
 int main(int argc, char* argv[]) {

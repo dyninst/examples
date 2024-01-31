@@ -22,11 +22,11 @@ int doitC(milliseconds delay) { return dostuff(delay); }
 
 int doitD(milliseconds delay) { return dostuff(delay); }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   milliseconds delay{800};
-  if (argc > 1) {
+  if(argc > 1) {
     int c = atoi(argv[1]);
-    if (c < 0) {
+    if(c < 0) {
       std::cerr << "Cannot have negative delay time\n";
       return -1;
     }
