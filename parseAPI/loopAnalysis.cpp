@@ -1,13 +1,14 @@
 #include "CFG.h"
+
 #include <vector>
 
 namespace dp = Dyninst::ParseAPI;
 
-void GetLoopInFunc(dp::Function *f) {
+void GetLoopInFunc(dp::Function* f) {
   std::vector<dp::Loop*> loops;
   f->getLoops(loops);
 
-  for(dp::Loop *loop : loops) {
+  for(dp::Loop* loop : loops) {
     // Get all the entry blocks
     std::vector<dp::Block*> entries;
     loop->getLoopEntries(entries);

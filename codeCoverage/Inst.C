@@ -4,14 +4,14 @@
  * blocks for coverage tracking, and outputting the results.
  */
 
+#include "Inst.h"
+
 #include <algorithm>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
 #include <iostream>
 #include <vector>
-
-#include "Inst.h"
 
 using namespace std;
 
@@ -21,17 +21,18 @@ public:
   string modName;
   unsigned long address;
   unsigned long count;
+
   bbRecord() : funcName(""), modName(""), address(0), count(0) {}
-  static bool compareBBRecordByName(const bbRecord &left,
-                                    const bbRecord &right) {
-    if (left.funcName == right.funcName) {
+
+  static bool compareBBRecordByName(const bbRecord& left, const bbRecord& right) {
+    if(left.funcName == right.funcName) {
       return left.count > right.count;
     }
     return left.funcName < right.funcName;
   }
-  static bool compareBBRecordByCount(const bbRecord &left,
-                                     const bbRecord &right) {
-    if (left.count == right.count) {
+
+  static bool compareBBRecordByCount(const bbRecord& left, const bbRecord& right) {
+    if(left.count == right.count) {
       return left.funcName < right.funcName;
     }
     return left.count > right.count;
@@ -43,17 +44,18 @@ public:
   string funcName;
   string modName;
   unsigned long count;
+
   funcRecord() : funcName(""), modName(""), count(0) {}
-  static bool compareFuncRecordByName(const funcRecord &left,
-                                      const funcRecord &right) {
-    if (left.funcName == right.funcName) {
+
+  static bool compareFuncRecordByName(const funcRecord& left, const funcRecord& right) {
+    if(left.funcName == right.funcName) {
       return left.count > right.count;
     }
     return left.funcName < right.funcName;
   }
-  static bool compareFuncRecordByCount(const funcRecord &left,
-                                       const funcRecord &right) {
-    if (left.count == right.count) {
+
+  static bool compareFuncRecordByCount(const funcRecord& left, const funcRecord& right) {
+    if(left.count == right.count) {
       return left.funcName < right.funcName;
     }
     return left.count > right.count;
@@ -79,7 +81,7 @@ void initCoverage(int totalFuncs, int totalBBs) {
 
 // Populates a record for a function
 void registerFunc(int id, char const* name, char const* modName) {
-  if (!enabled)
+  if(!enabled)
     return;
   funcs[id].funcName = name;
   funcs[id].modName = modName;
@@ -88,7 +90,7 @@ void registerFunc(int id, char const* name, char const* modName) {
 
 // Populates a record for a basic block
 void registerBB(int id, char const* name, char const* modName, unsigned long addr) {
-  if (!enabled)
+  if(!enabled)
     return;
   bbs[id].funcName = name;
   bbs[id].modName = modName;
@@ -98,14 +100,14 @@ void registerBB(int id, char const* name, char const* modName, unsigned long add
 
 // Should be called on function entry
 void incFuncCoverage(int id) {
-  if (!enabled)
+  if(!enabled)
     return;
   funcs[id].count++;
 }
 
 // Should be called on basic block entry
 void incBBCoverage(int id) {
-  if (!enabled)
+  if(!enabled)
     return;
 
   bbs[id].count++;
@@ -114,46 +116,45 @@ void incBBCoverage(int id) {
 // Prints the code coverage stats. to standard out, also disables any more
 // tracking
 void exitCoverage(int printAll, int printBasicBlocks, int sortAlphabetical) {
-  if (!enabled)
+  if(!enabled)
     return;
 
   printf("\n\n ************************** Code Coverage "
          "************************* \n\n");
   int count = 0;
-  if (sortAlphabetical)
+  if(sortAlphabetical)
     sort(funcs.begin(), funcs.end(), funcRecord::compareFuncRecordByName);
   else
     sort(funcs.begin(), funcs.end(), funcRecord::compareFuncRecordByCount);
 
-  for (int i = 0; i < numFuncs; ++i) {
-    if (funcs[i].count > 0)
+  for(int i = 0; i < numFuncs; ++i) {
+    if(funcs[i].count > 0)
       count++;
-    if (printAll || (funcs[i].count > 0))
-      printf(" %4lu : %s, %s\n", funcs[i].count, funcs[i].funcName.c_str(),
-             funcs[i].modName.c_str());
+    if(printAll || (funcs[i].count > 0))
+      printf(" %4lu : %s, %s\n", funcs[i].count, funcs[i].funcName.c_str(), funcs[i].modName.c_str());
   }
   printf("\n ************** Code Coverage %d out of %d functions "
          "************** \n\n",
          count, numFuncs);
 
-  if (printBasicBlocks) {
+  if(printBasicBlocks) {
     int bbCount = 0;
     printf("\n\n ************************** Basic Block Coverage "
            "************************* \n\n");
-    if (sortAlphabetical)
+    if(sortAlphabetical)
       sort(bbs.begin(), bbs.end(), bbRecord::compareBBRecordByName);
     else
       sort(bbs.begin(), bbs.end(), bbRecord::compareBBRecordByCount);
 
     string curFunc;
     string curMod;
-    for (int i = 0; i < numBBs; ++i) {
-      if (bbs[i].count > 0)
+    for(int i = 0; i < numBBs; ++i) {
+      if(bbs[i].count > 0)
         bbCount++;
-      else if (!printAll)
+      else if(!printAll)
         continue;
 
-      if (curFunc != bbs[i].funcName || curMod != bbs[i].modName) {
+      if(curFunc != bbs[i].funcName || curMod != bbs[i].modName) {
         curFunc = bbs[i].funcName;
         curMod = bbs[i].modName;
         printf(" (%s, %s)\n", bbs[i].funcName.c_str(), bbs[i].modName.c_str());

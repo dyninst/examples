@@ -1,4 +1,5 @@
 #include "InstructionDecoder.h"
+
 #include <array>
 #include <cstdint>
 #include <iomanip>
@@ -12,18 +13,15 @@ using ui = id::unknown_instruction;
 
 ia::Instruction unknown_instruction_handler(id::buffer b) {
   std::cout << "\nUnknown instruction encountered in byte sequence [";
-  auto *begin = b.start;
-  while (begin != b.end) {
+  auto* begin = b.start;
+  while(begin != b.end) {
     std::cout << std::hex << static_cast<int>(*begin) << ' ';
     ++begin;
   }
   std::cout << "]\n\n";
 
   // Return a multi-byte pseudo-NOP sequence
-  return {{e_nop, "nop", Dyninst::Architecture::Arch_x86_64},
-          5,
-          b.start,
-          Dyninst::Architecture::Arch_x86_64};
+  return {{e_nop, "nop", Dyninst::Architecture::Arch_x86_64}, 5, b.start, Dyninst::Architecture::Arch_x86_64};
 }
 
 int main() {
@@ -40,23 +38,21 @@ int main() {
   std::cout << "Decoding buffer starting at address 0x" << std::hex
             << reinterpret_cast<std::uint64_t>(buffer.data()) << "\n\n";
 
-  ia::InstructionDecoder decoder(buffer.data(), buffer.size(),
-                                 Dyninst::Architecture::Arch_x86_64);
+  ia::InstructionDecoder decoder(buffer.data(), buffer.size(), Dyninst::Architecture::Arch_x86_64);
 
   ui::register_callback(&unknown_instruction_handler);
 
   ia::Instruction i;
   do {
     i = decoder.decode();
-    if (i.isValid()) {
-      auto const *beg = static_cast<unsigned char const *>(i.ptr());
+    if(i.isValid()) {
+      auto const* beg = static_cast<unsigned char const*>(i.ptr());
       std::stringstream s;
       s << std::hex << std::showbase;
-      for (auto end = beg + i.size(); beg != end; ++beg) {
+      for(auto end = beg + i.size(); beg != end; ++beg) {
         s << static_cast<int>(*beg) << ' ';
       }
-      std::cout << std::left << std::setw(24) << s.str() << " | " << i.format()
-                << "\n";
+      std::cout << std::left << std::setw(24) << s.str() << " | " << i.format() << "\n";
     }
-  } while (i.isValid());
+  } while(i.isValid());
 }

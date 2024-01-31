@@ -1,4 +1,5 @@
 #include "slicing.h"
+
 #include "CFG.h"
 #include "Instruction.h"
 
@@ -12,14 +13,12 @@ namespace df = Dyninst::DataflowAPI;
 class ConstantPred : public Dyninst::Slicer::Predicates {
 public:
   // We do not want to track through memory writes
-  bool endAtPoint(Dyninst::AssignmentPtr ap) override {
-    return ap->insn().writesMemory();
-  }
+  bool endAtPoint(Dyninst::AssignmentPtr ap) override { return ap->insn().writesMemory(); }
 
   // We can treat PC as a constant as its value is the address of the
   // instruction
   bool addPredecessor(Dyninst::AbsRegion reg) override {
-    if (reg.absloc().type() == Dyninst::Absloc::Register) {
+    if(reg.absloc().type() == Dyninst::Absloc::Register) {
       return !reg.absloc().reg().isPC();
     }
     return true;
@@ -27,7 +26,7 @@ public:
 };
 
 // Assume that block b in function f ends with an indirect jump.
-void AnalyzeJumpTarget(pa::Function *f, pa::Block *b) {
+void AnalyzeJumpTarget(pa::Function* f, pa::Block* b) {
   // Get the last instruction in this block, which should be a jump
   ia::Instruction insn = b->getInsn(b->last());
 
@@ -42,10 +41,9 @@ void AnalyzeJumpTarget(pa::Function *f, pa::Block *b) {
   // An instruction can corresponds to multiple assignment.
   // Here we look for the assignment that changes the PC.
   Dyninst::Assignment::Ptr pcAssign;
-  for (auto a : assignments) {
-    Dyninst::AbsRegion const &out = a->out();
-    if (out.absloc().type() == Dyninst::Absloc::Register &&
-        out.absloc().reg().isPC()) {
+  for(auto a : assignments) {
+    Dyninst::AbsRegion const& out = a->out();
+    if(out.absloc().type() == Dyninst::Absloc::Register && out.absloc().reg().isPC()) {
       pcAssign = a;
       break;
     }

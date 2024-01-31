@@ -6,7 +6,7 @@ int threeCalled = 0;
 void three() { threeCalled = 1; }
 
 void two(int callThree) {
-  if (callThree)
+  if(callThree)
     three();
   twoCalled = 1;
 }
@@ -14,18 +14,18 @@ void two(int callThree) {
 void one(int callThree, int callLib) {
   two(callThree);
 
-  if (callLib)
+  if(callLib)
     external(callThree);
 }
 
-int main(int argc, char *[]) {
+int main(int argc, char*[]) {
   int callThree = 0, callLib = 0;
 
-  if (argc >= 2) {
+  if(argc >= 2) {
     callThree = 1;
   }
 
-  if (argc >= 3) {
+  if(argc >= 3) {
     callLib = 1;
   }
 

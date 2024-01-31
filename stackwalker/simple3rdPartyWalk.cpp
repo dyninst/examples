@@ -1,8 +1,8 @@
 #include "frame.h"
 #include "walker.h"
 
-#include <vector>
 #include <thread>
+#include <vector>
 
 // Collect a stack walk every five seconds.
 
