@@ -1,8 +1,11 @@
-This directory contains a simple code coverage tool built with DyninstAPI. The
-tool uses Dyninst to instrument every function in a program binary as well as
+# Code Coverage
+
+### A simple code coverage tool built with DyninstAPI
+
+The tool uses Dyninst to instrument every function in a program binary as well as
 optionally instrumenting every basic block to record code coverage data.  
 
-The goal of this tool is to demonstrate some of the capabilities of DyninstAPI.
+The goal is to demonstrate some of the capabilities of DyninstAPI.
 It does very little processing of the raw code coverage data, just some basic
 sorting when outputting the data. This tool should serve as the basis for
 creating a more feature-rich code coverage tool using Dyninst.
