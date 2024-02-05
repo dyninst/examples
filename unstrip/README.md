@@ -1,12 +1,9 @@
-This directory contains unstrip, a library fingerprinting tool built with
-parseAPI and symtabAPI. The tool identifies library wrapper functions in an
-input binary and outputs a new binary with meaningful names assigned to these
-functions.
+# unstrip
 
-The provided Makefile can be used to build unstrip. The DYNINST_ROOT
-environment variable should be set to the directory where Dyninst was
-built/installed. This directory should include an include directory with the
-Dyninst header files and a lib directory with the library files. 
+## A library fingerprinting tool
+
+The tool identifies library wrapper functions in an input binary and outputs
+a new binary with meaningful names assigned to these functions.
 
 To see usage information, run unstrip without an arguments.
 

@@ -10,15 +10,9 @@ To configure the build, you can use
 
 NOTE: The last three parts of the `Dyninst_DIR` path *must* be the `lib/cmake/Dyninst` directory under your Dyninst installation.
 
-The project can be built out-of-source using the usual `-B` and `-H` CMake flags.
-
-The default CMake configure uses GNU Makefiles as the generator, so to build is just
-
-    make install
-
 To build only specific examples, you can specify their names like so
 
-    make codeCoverage CFGraph
+    cmake --build <build_dir> --target codeCoverage
 
 ## Running
 
