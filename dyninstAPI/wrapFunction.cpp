@@ -59,10 +59,10 @@ int main(int argc, char** argv) {
 
   std::vector<st::Symbol*> syms;
   symtab->findSymbol(syms, orig_func,
-                     st::Symbol::ST_UNKNOWN,   // Don’t specify type
+                     st::Symbol::ST_UNKNOWN,   // Don't specify type
                      st::NameType::prettyName, // Look for demangled symbol name
                      false,                    // Not regular expression
-                     false,                    // Don’t check case
+                     false,                    // Don't check case
                      true);                    // Include undefined symbols
 
   if(syms.size() != 1) {
