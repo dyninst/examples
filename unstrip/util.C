@@ -53,6 +53,7 @@
 #include "Immediate.h"
 #include "InstructionDecoder.h"
 #include "Register.h"
+#include "MultiRegister.h"
 
 // dataflowAPI
 #include "SymEval.h"

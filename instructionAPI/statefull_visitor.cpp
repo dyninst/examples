@@ -6,6 +6,7 @@
 #include "InstructionDecoder.h"
 #include "Operand.h"
 #include "Register.h"
+#include "MultiRegister.h"
 #include "Visitor.h"
 
 #include <array>
@@ -31,6 +32,7 @@ struct stateful_visitor : di::Visitor {
   void visit(di::Immediate*) override { foundImm = true; }
 
   void visit(di::RegisterAST*) override { foundReg = true; }
+  void visit(di::MultiRegisterAST*) override { foundReg = true; }
 
   void visit(di::Dereference*) override { foundDer = true; }
 
