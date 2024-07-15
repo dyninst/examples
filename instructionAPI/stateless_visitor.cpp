@@ -6,6 +6,7 @@
 #include "InstructionDecoder.h"
 #include "Operand.h"
 #include "Register.h"
+#include "MultiRegister.h"
 #include "Visitor.h"
 
 #include <array>
@@ -38,6 +39,11 @@ public:
   void visit(di::RegisterAST* r) override {
     std::cout << "  Register '" << r->format(di::defaultStyle) << "'\n";
   }
+
+  void visit(di::MultiRegisterAST* r) override {
+    std::cout << "  MultiRegister '" << r->format(di::defaultStyle) << "'\n";
+  }
+
 };
 
 void print(di::Instruction const& insn) {
