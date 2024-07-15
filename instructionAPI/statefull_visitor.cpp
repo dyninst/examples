@@ -23,10 +23,10 @@ namespace di = Dyninst::InstructionAPI;
 
 struct stateful_visitor : di::Visitor {
   bool foundReg{};
+  bool foundMultiReg{};
   bool foundImm{};
   bool foundBin{};
   bool foundDer{};
-  bool foundMultiReg{};
 
   void visit(di::BinaryFunction*) override { foundBin = true; }
 
@@ -34,19 +34,20 @@ struct stateful_visitor : di::Visitor {
 
   void visit(di::RegisterAST*) override { foundReg = true; }
 
+  void visit(di::MultiRegisterAST*) override { foundMultiReg = true; }
+
   void visit(di::Dereference*) override { foundDer = true; }
 
-  void visit(di::MultiRegisterAST*) override { foundMultiReg = true; }
 
 
   // clang-format off
   friend std::ostream& operator<<(std::ostream &os, stateful_visitor const& v) {
     std::cout << std::boolalpha
               << "  foundReg: " << v.foundReg << '\n'
+              << "  foundMultiReg: " << v.foundMultiReg << '\n'
               << "  foundImm: " << v.foundImm << '\n'
               << "  foundBin: " << v.foundBin << '\n'
-              << "  foundDer: " << v.foundDer << '\n'
-              << "  foundMultiReg: " << v.foundMultiReg << '\n';
+              << "  foundDer: " << v.foundDer << '\n';
     return os;
   }
 
