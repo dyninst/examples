@@ -38,8 +38,6 @@ struct stateful_visitor : di::Visitor {
 
   void visit(di::Dereference*) override { foundDer = true; }
 
-
-
   // clang-format off
   friend std::ostream& operator<<(std::ostream &os, stateful_visitor const& v) {
     std::cout << std::boolalpha
