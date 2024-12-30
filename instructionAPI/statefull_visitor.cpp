@@ -54,11 +54,9 @@ struct stateful_visitor : di::Visitor {
 
 void print(di::Instruction const& insn) {
   stateful_visitor v;
-  std::vector<di::Operand> operands;
-  insn.getOperands(operands);
 
   std::cout << "instruction: " << insn.format() << '\n';
-  for(auto const& o : operands) {
+  for(auto const& o : insn.getAllOperands()) {
     std::cout << "operand '" << o.format(insn.getArch()) << "'\n";
     o.getValue()->apply(&v);
     std::cout << v << '\n';

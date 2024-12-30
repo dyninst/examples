@@ -48,12 +48,10 @@ public:
 
 void print(di::Instruction const& insn) {
   printer pv;
-  std::vector<di::Operand> operands;
-  insn.getOperands(operands);
 
   std::cout << "instruction: " << insn.format() << '\n';
   int op_num = 1;
-  for(auto const& o : operands) {
+  for(auto const& o : insn.getAllOperands()) {
     std::cout << "operand" << op_num << " '" << o.format(insn.getArch()) << "'\n";
     o.getValue()->apply(&pv);
     op_num++;
