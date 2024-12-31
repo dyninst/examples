@@ -6,7 +6,7 @@ find_package(Dyninst 13.0.0 REQUIRED COMPONENTS dyninstAPI dynC_API parseAPI
 
 add_executable(InterestingProgram common/mutatees/InterestingProgram.cpp)
 
-set(EXAMPLES_WARNING_FLAGS -Wall -Wextra)
+set(EXAMPLES_WARNING_FLAGS -Wall -Wextra -Wpedantic -Werror)
 
 add_subdirectory(CFGraph)
 add_subdirectory(codeCoverage)
