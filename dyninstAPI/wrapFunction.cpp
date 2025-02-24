@@ -37,7 +37,7 @@ int main(int argc, char** argv) {
 
   auto find_func = [appImage](std::string const& name) -> BPatch_function* {
     std::vector<BPatch_function*> funcs;
-    appImage->findFunction("", funcs);
+    appImage->findFunction(name.c_str(), funcs);
     if(funcs.size() != 1) {
       std::cerr << "Unable to find '" << name << "'\n";
       return nullptr;
@@ -71,4 +71,6 @@ int main(int argc, char** argv) {
   }
 
   appBin->wrapFunction(original_malloc, fast_malloc, syms[0]);
+  std::string new_name = std::string(argv[1]) + ".rewr";
+  appBin->writeFile(new_name.c_str());
 }
