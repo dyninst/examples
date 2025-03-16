@@ -17,7 +17,7 @@ pc::Process::cb_ret_t on_thread_create(pc::Event::const_ptr ev) {
 int main(int argc, char* argv[]) {
 
   std::vector<std::string> args(argv + 1, argv + argc);
-  pc::Process::ptr proc = pc::Process::createProcess(argv[0], args);
+  pc::Process::ptr proc = pc::Process::createProcess(args[0], args);
 
   // Tell ProcControlAPI about our callback function
   pc::Process::registerEventCallback(pc::EventType::ThreadCreate, on_thread_create);
