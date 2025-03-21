@@ -58,46 +58,46 @@ int main(int argc, char** argv) {
   InstructionDecoder decoder((const void *)nullptr, 1, sts->getArch());
   for(auto fit = all.begin(); fit != all.end(); ++fit) {
     Function* f = *fit;
-    // get address of entry point for current function
-    Address crtAddr = f->addr();
     int instr_count = 0;
-    auto fbl = f->blocks().end();
-    fbl--;
-    Block* b = *fbl;
-    Address lastAddr = b->end();
-    // if current function has zero instructions, d o n t output it
-    if(crtAddr == lastAddr)
+    // if current function has zero basic blocks, d o n t output it
+    if(f->blocks().empty())
       continue;
     cout << "\n\n" << hex << setfill('0') << setw(2 * sts->getAddressWidth()) << f->addr() << " <" << f->name() << ">:\n";
-    while(crtAddr < lastAddr) {
-      // decode current instruction
-      const unsigned char *instr_ptr = (const unsigned char *)f->isrc()->getPtrToInstruction(crtAddr);
-      instr = decoder.decode(instr_ptr);
+    auto fbl = f->blocks().end();
+    fbl--;
+    for (Block *b : f->blocks()) {
+      Address crtAddr = b->start();
+      Address lastAddr = b->end();
+      while(crtAddr < lastAddr) {
+        // decode current instruction
+        const unsigned char *instr_ptr = (const unsigned char *)f->isrc()->getPtrToInstruction(crtAddr);
+        instr = decoder.decode(instr_ptr);
 
-      // failed to decode the instruction
-      if (instr.size() == 0)
-        break;
+        // failed to decode the instruction
+        if (instr.size() == 0)
+          break;
 
-      // pretty print it
-      cout << hex << setfill(' ') << setw(8) << crtAddr << ":       ";
-      for (size_t i = 0; i < instr.size() && i < l1_width; i++) {
-        cout << hex << setfill('0') << setw(2) << (unsigned)instr_ptr[i] << " ";
-      }
-      for (size_t i = min(instr.size(), (size_t)l1_width); i < 8; i++) {
-        cout << "   ";
-      }
-      cout << instr.format() << "\n";
-      if (instr.size() > l1_width) {
-        cout << hex << setfill(' ') << setw(8) << crtAddr + l1_width << ":       ";
-        for (size_t i = l1_width; i < instr.size(); i++) {
+        // pretty print it
+        cout << hex << setfill(' ') << setw(8) << crtAddr << ":       ";
+        for (size_t i = 0; i < instr.size() && i < l1_width; i++) {
           cout << hex << setfill('0') << setw(2) << (unsigned)instr_ptr[i] << " ";
         }
-        cout << "\n";
-      }
+        for (size_t i = min(instr.size(), (size_t)l1_width); i < 8; i++) {
+          cout << "   ";
+        }
+        cout << instr.format() << "\n";
+        if (instr.size() > l1_width) {
+          cout << hex << setfill(' ') << setw(8) << crtAddr + l1_width << ":       ";
+          for (size_t i = l1_width; i < instr.size(); i++) {
+            cout << hex << setfill('0') << setw(2) << (unsigned)instr_ptr[i] << " ";
+          }
+          cout << "\n";
+        }
 
-      // go to the address of the next instruction
-      crtAddr += instr.size();
-      instr_count++;
+        // go to the address of the next instruction
+        crtAddr += instr.size();
+        instr_count++;
+      }
     }
   }
   return 0;
