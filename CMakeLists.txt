@@ -8,6 +8,7 @@ add_executable(InterestingProgram common/mutatees/InterestingProgram.cpp)
 
 set(EXAMPLES_WARNING_FLAGS -Wall -Wextra -Wpedantic -Werror)
 
+add_subdirectory(AMDSIMTCFG)
 add_subdirectory(branchInfo)
 add_subdirectory(CFGraph)
 add_subdirectory(codeCoverage)

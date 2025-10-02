@@ -84,8 +84,8 @@ int main(int argc, const char *argv[]) {
 
         std::cout << "\t" << fun->name() << " has:\n\t" << f_Points.size()
             << " entry points" << std::endl;
-        //if(fun->name() != "a" && fun->name()!= "_start" && fun->name() != "_fini")
-        if(fun->name() != "a" && fun->name() != "_fini")
+        if(fun->name() != "a" && fun->name()!= "_start" && fun->name() != "_fini")
+        //if(fun->name() != "a" && fun->name() != "_fini")
           continue;
         for (dpa::Point *point : f_Points) {
             //std::cerr << "\t\t" << "Point @ " << point << " addr: " << std::hex << point->addr() << std::endl;

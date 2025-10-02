@@ -1,0 +1,5 @@
+project(CFGraph LANGUAGES CXX)
+find_package(fmt CONFIG REQUIRED)
+add_executable(AMDSIMTCFG AMDSIMTCFG.cpp)
+target_compile_options(AMDSIMTCFG PRIVATE ${EXAMPLES_WARNING_FLAGS})
+target_link_libraries(AMDSIMTCFG PRIVATE Dyninst::dyninstAPI fmt::fmt)
