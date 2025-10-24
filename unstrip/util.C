@@ -108,11 +108,9 @@ bool isCallToSyscallTrampStore(Instruction insn, Address& _syscallTramp) {
   if(insn.getOperation().getID() == e_call) {
     Expression::Ptr cft = insn.getControlFlowTarget();
     if(typeid(cft) == typeid(Dereference::Ptr)) {
-      vector<InstructionAST::Ptr> children;
-      cft->getChildren(children);
+      auto children = cft->getSubexpressions();
       if(children.size() == 1) {
-        InstructionAST::Ptr child = children.front();
-        Expression::Ptr immed = boost::dynamic_pointer_cast<Expression>(child);
+        Expression::Ptr immed = children.front();
         Result res = immed->eval();
         Address syscallTramp = res.convert<Address>();
         if(syscallTramp) {
