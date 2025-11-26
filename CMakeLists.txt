@@ -10,6 +10,7 @@ set(EXAMPLES_WARNING_FLAGS -Wall -Wextra -Wpedantic -Werror)
 
 add_subdirectory(CFGraph)
 add_subdirectory(codeCoverage)
+add_subdirectory(compareLLVM)
 add_subdirectory(dataflowAPI)
 add_subdirectory(disassemble)
 add_subdirectory(DynC)
