@@ -30,6 +30,12 @@ const MachRegister arg_register[] = {aarch64::x0, aarch64::x1, aarch64::x2, aarc
 // https://refspecs.linuxfoundation.org/ELF/ppc64/PPC-elf64abi.html#REG
 const MachRegister arg_register[] = {ppc64::r3, ppc64::r4, ppc64::r5, ppc64::r6,
                                      ppc64::r7, ppc64::r8, ppc64::r9, ppc64::r10};
+#elif defined(__riscv) && (__riscv_xlen == 64)
+#  include "registers/riscv64_regs.h"
+// RISC-V 64-bit calling conventions from
+// https://riscv.org/wp-content/uploads/2024/12/riscv-calling.pdf
+const MachRegister arg_register[] = {riscv64::a0, riscv64::a1, riscv64::a2, riscv64::a3,
+                                     riscv64::a4, riscv64::a5, riscv64::a6, riscv64::a7};
 #elif
 #  error "Unsupported architecture"
 #endif
