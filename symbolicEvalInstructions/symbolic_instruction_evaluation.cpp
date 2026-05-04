@@ -35,7 +35,7 @@ int main(int argc, char* argv[]) {
   }();
 
   BPatch_flowGraph* cfg = function->getCFG();
-  BPatch_Set<BPatch_basicBlock*> blocks;
+  std::set<BPatch_basicBlock*> blocks;
   cfg->getAllBasicBlocks(blocks);
 
   Dyninst::AssignmentConverter converter(true, false);
