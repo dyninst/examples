@@ -149,8 +149,8 @@ bool insertBBEntry(BPatch_binaryEdit* appBin, BPatch_function* curFunc, char con
                    char const* moduleName, BPatch_function* instBBIncFunc, BPatch_function* registerBB,
                    int* bbIndex, BPatch_Vector<BPatch_snippet*>* registerCalls) {
   BPatch_flowGraph* appCFG = curFunc->getCFG();
-  BPatch_Set<BPatch_basicBlock*> allBlocks;
-  BPatch_Set<BPatch_basicBlock*>::iterator iter;
+  std::set<BPatch_basicBlock*> allBlocks;
+  std::set<BPatch_basicBlock*>::iterator iter;
   if(!appCFG) {
     cerr << "Failed to find CFG for function " << funcName << endl;
     return EXIT_FAILURE;

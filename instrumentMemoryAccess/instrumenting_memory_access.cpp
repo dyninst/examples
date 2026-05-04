@@ -51,7 +51,7 @@ bool instrumentMemoryAccesses(BPatch_addressSpace* app) {
   BPatch_image* appImage = app->getImage();
 
   // We're interested in loads and stores
-  BPatch_Set<BPatch_opCode> axs;
+  std::set<BPatch_opCode> axs;
   axs.insert(BPatch_opLoad);
   axs.insert(BPatch_opStore);
 
