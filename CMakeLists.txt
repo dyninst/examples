@@ -31,3 +31,5 @@ add_subdirectory(symtabAPI)
 add_subdirectory(tracetool)
 add_subdirectory(unstrip)
 add_subdirectory(unusedArgs)
+
+include(CTest)
