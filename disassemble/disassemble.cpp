@@ -30,7 +30,7 @@ int main(int argc, char** argv) {
     return -1;
   }
   char* binaryPath = argv[1];
-
+  InstructionDecoder::unknown_instruction::register_default_callback();
   SymtabCodeSource* sts;
   CodeObject* co;
   Instruction instr;
