@@ -10,6 +10,7 @@
 using namespace Dyninst;
 using namespace SymtabAPI;
 using namespace ParseAPI;
+using namespace InstructionAPI;
 using namespace std;
 
 #if defined(__x86_64__)
