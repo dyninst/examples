@@ -48,7 +48,7 @@ int main(int argc, const char* argv[]) {
 
   dpa::PatchMgrPtr patchMgr = dpa::convert(image);
 
-  vector<BPatch_object*> objects;
+  std::vector<BPatch_object*> objects;
   image->getObjects(objects);
 
   std::cout << "Found " << objects.size() << " objects\n";
